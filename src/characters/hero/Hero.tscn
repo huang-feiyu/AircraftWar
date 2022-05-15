@@ -1,7 +1,9 @@
-[gd_scene load_steps=5 format=2]
+[gd_scene load_steps=7 format=2]
 
 [ext_resource path="res://assets/img/hero/hero.png" type="Texture" id=1]
 [ext_resource path="res://src/characters/hero/Hero.gd" type="Script" id=2]
+[ext_resource path="res://src/characters/bullets/HeroBullet.tscn" type="PackedScene" id=3]
+[ext_resource path="res://assets/audio/sfx/bullet.wav" type="AudioStream" id=4]
 
 [sub_resource type="SpriteFrames" id=1]
 animations = [ {
@@ -16,12 +18,13 @@ radius = 40.0
 height = 23.3333
 
 [node name="Hero" type="Area2D"]
-position = Vector2( 524, 860 )
+position = Vector2( 493, 1298 )
 scale = Vector2( 3, 3 )
 script = ExtResource( 2 )
 __meta__ = {
 "_edit_group_": true
 }
+hero_bullet_scene = ExtResource( 3 )
 
 [node name="AnimatedSprite" type="AnimatedSprite" parent="."]
 frames = SubResource( 1 )
@@ -31,4 +34,14 @@ animation = "idle"
 rotation = 1.5708
 shape = SubResource( 2 )
 
-[connection signal="input_event" from="." to="." method="_on_Hero_input_event"]
+[node name="BulletTimer" type="Timer" parent="."]
+wait_time = 0.25
+
+[node name="BulletSound" type="AudioStreamPlayer2D" parent="."]
+stream = ExtResource( 4 )
+volume_db = 3.0
+area_mask = 0
+
+[connection signal="hit" from="." to="." method="_on_Hero_hit"]
+[connection signal="timeout" from="BulletTimer" to="." method="_on_BulletTimer_timeout"]
+[connection signal="finished" from="BulletSound" to="." method="_on_BulletSound_finished"]
