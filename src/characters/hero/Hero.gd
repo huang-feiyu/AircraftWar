@@ -54,8 +54,7 @@ func _on_Hero_hit():
 func _on_BulletTimer_timeout():
 	# print("Hero: shoot")
 	var bullet = hero_bullet_scene.instance()
-	bullet.position = self.position
-	bullet.position.y -= 100
+	bullet.start(self.position, power)
 	get_parent().add_child(bullet)
 	if !is_playing_bullet_sound:
 		# play sound
@@ -73,7 +72,7 @@ func start(pos):
 
 # death
 func end():
-	$BulletTime.stop()
+	$BulletTimer.stop()
 	is_dead = true
 
 

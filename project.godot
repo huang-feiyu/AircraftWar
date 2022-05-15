@@ -8,16 +8,6 @@
 
 config_version=4
 
-_global_script_classes=[ {
-"base": "Area2D",
-"class": "HeroBullet",
-"language": "GDScript",
-"path": "res://src/characters/bullets/HeroBullet.gd"
-} ]
-_global_script_class_icons={
-"HeroBullet": ""
-}
-
 [application]
 
 config/name="AircraftWar"
