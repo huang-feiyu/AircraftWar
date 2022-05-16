@@ -42,6 +42,6 @@ stream = ExtResource( 4 )
 volume_db = 3.0
 area_mask = 0
 
-[connection signal="hit" from="." to="." method="_on_Hero_hit"]
+[connection signal="area_entered" from="." to="." method="_on_Hero_area_entered"]
 [connection signal="timeout" from="BulletTimer" to="." method="_on_BulletTimer_timeout"]
 [connection signal="finished" from="BulletSound" to="." method="_on_BulletSound_finished"]

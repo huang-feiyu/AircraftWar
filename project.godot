@@ -11,13 +11,17 @@ config_version=4
 [application]
 
 config/name="AircraftWar"
-run/main_scene="res://src/characters/hero/Hero.tscn"
+run/main_scene="res://src/models/game/Game.tscn"
 
 [display]
 
 window/size/width=1080
 window/size/height=2280
 window/handheld/orientation="portrait"
+
+[global]
+
+scene=false
 
 [input]
 

@@ -19,26 +19,41 @@ func _ready():
 func _process(delta):
 	position.y += velocity.y * delta
 	position.x += velocity.x * delta
+	if hp <= 0:
+		end()
 
 # shoot bullets
 func _on_BulletTimer_timeout():
 	# print("Hero: shoot")
 	var bullet = enemy_bullet_scene.instance()
-	bullet.start(self.position, power)
+	bullet.start(position, power)
 	get_parent().add_child(bullet)
+
+# crash detection
+func _on_Mob_area_entered(area:Area2D):
+	if "HeroBullet" in area.name:
+		hp -= area.power
+		decreases_hp(area.call("get_power"))
+		print("HeroBullet hit")
+		area.call("end")
+	if area.name == "Hero":
+		end()
 
 # out of the boundary
 func _on_VisibilityNotifier2D_screen_exited():
-	print("Mob: out of the boundary")
-	queue_free()
 	end()
 
 # init
 func start(pos):
-	self.position = pos
+	position = pos
 
 # death
 func end():
 	$BulletTimer.stop()
 	is_dead = true
+	queue_free()
+	hide()
 
+# decrease hp
+func decreases_hp(damage):
+	hp -= damage

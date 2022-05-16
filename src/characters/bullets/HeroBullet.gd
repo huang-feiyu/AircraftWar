@@ -14,19 +14,22 @@ func _process(delta):
 	position.y += velocity.y * delta
 	position.x += velocity.x * delta
 
-# if crash something, remove the bullet
-func _on_HeroBullet_body_entered(body):
-	if body.name == "Elite" || body.name == "Mob" || body.name == "Boss":
-		print("HeroBullet: hit " + body.name)
-		queue_free()
-
 # out of the boundary
 func _on_VisibilityNotifier2D_screen_exited():
 	# print("HeroBullet: out of the boundary")
-	queue_free()
+	end()
 
 # init
 func start(pos, ipower):
-	self.position = pos
-	self.position.y -= 100
-	self.power = ipower
+	position = pos
+	position.y -= 100
+	power = ipower
+
+# end
+func end():
+	hide()
+	queue_free()
+
+# get power
+func get_power():
+	return power

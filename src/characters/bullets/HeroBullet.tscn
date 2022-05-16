@@ -35,5 +35,4 @@ shape = SubResource( 2 )
 position = Vector2( 11, 349 )
 scale = Vector2( 54.025, 113.55 )
 
-[connection signal="body_entered" from="." to="." method="_on_HeroBullet_body_entered"]
 [connection signal="screen_exited" from="VisibilityNotifier2D" to="." method="_on_VisibilityNotifier2D_screen_exited"]

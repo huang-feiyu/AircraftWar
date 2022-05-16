@@ -13,23 +13,20 @@ const MAX_POWER = 50
 var hp = MAX_HP
 var power = 30
 var shoot_num = 1
-var is_dead = false
 
-# Hero: Signals
-signal hit
+signal is_dead
 
 # Called when the node enters the scene tree for the first time.
 func _ready():
 	set_process(true)
-	$BulletTimer.start()
-	# hide()
+	hide()
 
-# Called every frame. 'delta' is the elapsed time since the previous frame.
-# aka. move_foward
+# death detection
 func _process(delta):
-	pass
+	if hp <= 0:
+		end()
 
-# dragging
+# move_forward: dragging
 func _input(event):
 	# Code from: https://docs.godotengine.org/zh_CN/stable/tutorials/inputs/input_examples.html
 	if event is InputEventScreenTouch:
@@ -41,38 +38,49 @@ func _input(event):
 		# Stop dragging if the button is released.
 		else:
 			dragging = false
-
 	if event is InputEventScreenDrag and dragging:
-		self.position = event.position
-
-
-# hit
-func _on_Hero_hit():
-	pass # Replace with function body.
+		position = event.position
 
 # shoot
 func _on_BulletTimer_timeout():
 	# print("Hero: shoot")
 	var bullet = hero_bullet_scene.instance()
-	bullet.start(self.position, power)
+	bullet.start(position, power)
 	get_parent().add_child(bullet)
 	if !is_playing_bullet_sound:
 		# play sound
 		$BulletSound.play()
 		is_playing_bullet_sound = true
 
+# shoot bullet sound on after the previous one ends
 func _on_BulletSound_finished():
 	is_playing_bullet_sound = false
 
+# crash detection
+func _on_Hero_area_entered(area:Area2D):
+	if "EnemyBullet" in area.name:
+		decreases_hp(area.call("get_power"))
+		# print("EnemyBullet hit; Hero hp:", hp)
+		area.call("end")
+	# if "Mob" in area.name:
+	# 	self.end()
+
 # init
 func start(pos):
-	self.position = pos
-	# show()
-	# $CollisionShape2D.disabled = false
+	position = pos
+	$BulletTimer.start()
+	show()
 
 # death
 func end():
 	$BulletTimer.stop()
-	is_dead = true
+	queue_free()
+	hide()
 
+# decrease hp
+func decreases_hp(damage):
+	if hp - damage >= MAX_HP:
+		hp = MAX_HP
+	else:
+		hp -= damage
 
