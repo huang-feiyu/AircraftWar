@@ -7,12 +7,10 @@ var dragging = false
 var is_playing_bullet_sound = false
 
 # Hero: Attributes
-const MAX_HP = 1000
-const MAX_SHOOT_NUM = 7
-const MAX_POWER = 50
-var hp = MAX_HP
+var hp = GameManager.HERO_MAX_HP
 var power = 30
 var shoot_num = 1
+var score = 0
 
 signal is_dead
 
@@ -30,10 +28,8 @@ func _process(delta):
 func _input(event):
 	# Code from: https://docs.godotengine.org/zh_CN/stable/tutorials/inputs/input_examples.html
 	if event is InputEventScreenTouch:
-		print("Hero: touch screen")
 		# Start dragging if the click is on the sprite.
 		if event.is_pressed():
-			print("Hero: dragging now")
 			dragging = true
 		# Stop dragging if the button is released.
 		else:
@@ -62,8 +58,8 @@ func _on_Hero_area_entered(area:Area2D):
 		decreases_hp(area.call("get_power"))
 		# print("EnemyBullet hit; Hero hp:", hp)
 		area.call("end")
-	# if "Mob" in area.name:
-	# 	self.end()
+	if "Mob" in area.name:
+		end()
 
 # init
 func start(pos):
@@ -73,14 +69,17 @@ func start(pos):
 
 # death
 func end():
+	hp = 0
 	$BulletTimer.stop()
 	queue_free()
 	hide()
 
 # decrease hp
 func decreases_hp(damage):
-	if hp - damage >= MAX_HP:
-		hp = MAX_HP
+	if hp - damage >= GameManager.HERO_MAX_HP:
+		hp = GameManager.HERO_MAX_HP
 	else:
 		hp -= damage
+	GameManager.hero_hp = hp
+	print("Hero hp:", hp)
 

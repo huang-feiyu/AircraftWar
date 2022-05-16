@@ -13,6 +13,10 @@ config_version=4
 config/name="AircraftWar"
 run/main_scene="res://src/models/game/Game.tscn"
 
+[autoload]
+
+GameManager="*res://src/GameManager.gd"
+
 [display]
 
 window/size/width=1080

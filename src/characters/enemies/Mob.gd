@@ -3,10 +3,11 @@ extends Area2D
 export(PackedScene) var enemy_bullet_scene
 
 # Mob: Attributes
-var hp = 30
+var hp = GameManager.MOB_MAX_HP
 var power = 30
 var is_dead = false
 var velocity = Vector2(0, 150)
+var score_value = 10
 
 
 # Called when the node enters the scene tree for the first time.
@@ -20,6 +21,8 @@ func _process(delta):
 	position.y += velocity.y * delta
 	position.x += velocity.x * delta
 	if hp <= 0:
+		GameManager.score += score_value
+		print("Score:", GameManager.score)
 		end()
 
 # shoot bullets
@@ -45,15 +48,21 @@ func _on_VisibilityNotifier2D_screen_exited():
 
 # init
 func start(pos):
+	GameManager.enemy_num += 1
 	position = pos
 
 # death
 func end():
 	$BulletTimer.stop()
 	is_dead = true
+	GameManager.enemy_num -= 1
 	queue_free()
 	hide()
 
 # decrease hp
 func decreases_hp(damage):
 	hp -= damage
+
+# dead with score
+func dead_score():
+	decreases_hp(GameManager.MOB_MAX_HP)
