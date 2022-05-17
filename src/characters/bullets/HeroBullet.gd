@@ -17,7 +17,10 @@ func _process(delta):
 # out of the boundary
 func _on_VisibilityNotifier2D_screen_exited():
 	# print("HeroBullet: out of the boundary")
-	end()
+	queue_free()
+
+func _on_BulletHit_finished():
+	queue_free()
 
 # init
 func start(pos, ipower):
@@ -26,8 +29,11 @@ func start(pos, ipower):
 
 # end
 func end():
+	if GameManager.is_sound_on:
+		$BulletHit.play()
+	else:
+		queue_free()
 	hide()
-	queue_free()
 
 # get power
 func get_power():

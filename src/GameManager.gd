@@ -5,7 +5,7 @@ var is_sound_on = true
 
 # Hero
 var hero_hp = HERO_MAX_HP
-var hero_bullet_num = 1
+var hero_bullet_num = 3
 
 # Enemies
 var enemy_num = 0

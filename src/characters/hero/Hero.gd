@@ -41,14 +41,6 @@ func _on_BulletTimer_timeout():
 		var pos = Vector2(position.x + (i - GameManager.hero_bullet_num / 2) * 40, position.y - 100)
 		bullet.start(pos, power)
 		get_parent().add_child(bullet)
-	# if !is_playing_bullet_sound and GameManager.is_sound_on:
-	# 	# play sound
-	# 	$BulletSound.play()
-	# 	is_playing_bullet_sound = true
-
-# shoot bullet sound on after the previous one ends
-func _on_BulletSound_finished():
-	is_playing_bullet_sound = false
 
 # crash detection
 func _on_Hero_area_entered(area:Area2D):

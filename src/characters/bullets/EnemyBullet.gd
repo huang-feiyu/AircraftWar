@@ -16,7 +16,7 @@ func _process(delta):
 # out of the boundary
 func _on_VisibilityNotifier2D_screen_exited():
 	# print("EnemyBullet: out of the boundary")
-	end()
+	queue_free()
 
 # init
 func start(pos, ipower):
