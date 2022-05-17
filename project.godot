@@ -15,7 +15,7 @@ run/main_scene="res://src/models/game/Game.tscn"
 
 [autoload]
 
-GameManager="*res://src/models/GameManager.gd"
+GameManager="*res://src/models/game/GameManager.gd"
 
 [display]
 

@@ -34,6 +34,7 @@ func _process(delta):
 		print("bomb supply")
 		get_tree().call_group("mobs", "end")
 		get_tree().call_group("elites", "end")
+		get_tree().call_group("bullets", "end")
 
 # boss generate
 func _on_Game_boss_generate():
