@@ -50,7 +50,7 @@ func _on_Hero_area_entered(area:Area2D):
 		decreases_hp(area.call("get_power"))
 		# print("EnemyBullet hit; Hero hp:", hp)
 		area.call("end")
-	elif "Mob" in area.name:
+	elif "Mob" in area.name or "Boss" in area.name or "Elite" in area.name:
 		end()
 
 	# props

@@ -23,9 +23,9 @@ func _process(delta):
 	$PlayHUD.call("update_score")
 
 	# boss
-	if GameManager.score > GameManager.BOSS_GENERATE_SCORE * (GameManager.boss_count ) and !GameManager.is_boss_alive:
+	if GameManager.score > GameManager.BOSS_GENERATE_SCORE * (GameManager.boss_count + 1):
 		emit_signal("boss_generate")
-	if !GameManager.is_boss_alive and GameManager.is_sound_on:
+	if !GameManager.boss_alive >= 1 and GameManager.is_sound_on:
 		emit_signal("boss_bgm_stop")
 
 	# bomb
@@ -38,7 +38,7 @@ func _process(delta):
 # boss generate
 func _on_Game_boss_generate():
 	GameManager.boss_count += 1
-	GameManager.is_boss_alive = true
+	GameManager.boss_alive += 1
 	var boss = boss_scene.instance()
 	var pos = Vector2(rand_range(0.1, 0.9) * screen_size.x, rand_range(0.1, 0.2) * screen_size.y)
 	boss.start(pos)
@@ -61,12 +61,12 @@ func _on_Game_boss_bgm_stop():
 
 # replay bgm
 func _on_BgmSound_finished():
-	if not GameManager.is_boss_alive:
+	if GameManager.boss_alive < 1:
 		$BgmSound.play()
 
 # replay boss bgm
 func _on_BossBgmSound_finished():
-	if GameManager.is_boss_alive:
+	if GameManager.boss_alive >= 1:
 		$BossBgmSound.play()
 
 # start a game
