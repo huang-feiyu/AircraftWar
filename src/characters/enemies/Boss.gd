@@ -1,8 +1,11 @@
 extends Area2D
 
 export(PackedScene) var enemy_bullet_scene
+export(PackedScene) var blood_prop_scene
+export(PackedScene) var bullet_prop_scene
+export(PackedScene) var bomb_prop_scene
 
-# Mob: Attributes
+# Boss: Attributes
 var hp = GameManager.BOSS_MAX_HP
 var power = 10
 var velocity = Vector2(50, 0)
@@ -23,6 +26,7 @@ func _process(delta):
 	if hp <= 0:
 		GameManager.score += score_value
 		print("Score:", GameManager.score)
+		prop_generate()
 		end()
 
 # shoot bullets
@@ -61,3 +65,12 @@ func decreases_hp(damage):
 # dead with score
 func dead_score():
 	decreases_hp(GameManager.BOSS_MAX_HP)
+
+# generate props
+func prop_generate():
+	var switch = randi() % 3
+	var prop = blood_prop_scene.instance() if switch == 0 \
+				else bullet_prop_scene.instance() if switch == 1 \
+				else bomb_prop_scene.instance()
+	prop.start(position)
+	get_parent().add_child(prop)

@@ -1,0 +1,39 @@
+[gd_scene load_steps=6 format=2]
+
+[ext_resource path="res://assets/img/props/prop_bullet.png" type="Texture" id=1]
+[ext_resource path="res://assets/audio/sfx/get_supply.wav" type="AudioStream" id=2]
+[ext_resource path="res://src/characters/props/Bullet.gd" type="Script" id=3]
+
+[sub_resource type="SpriteFrames" id=1]
+animations = [ {
+"frames": [ ExtResource( 1 ) ],
+"loop": true,
+"name": "idle",
+"speed": 5.0
+} ]
+
+[sub_resource type="CapsuleShape2D" id=2]
+radius = 19.0
+height = 0.0
+
+[node name="Bullet" type="Area2D"]
+position = Vector2( 503, 381 )
+script = ExtResource( 3 )
+
+[node name="AnimatedSprite" type="AnimatedSprite" parent="."]
+scale = Vector2( 3, 3 )
+frames = SubResource( 1 )
+animation = "idle"
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+shape = SubResource( 2 )
+
+[node name="VisibilityNotifier2D" type="VisibilityNotifier2D" parent="."]
+position = Vector2( 36, 763 )
+scale = Vector2( 53.4, 114.2 )
+
+[node name="GetSupply" type="AudioStreamPlayer" parent="."]
+stream = ExtResource( 2 )
+
+[connection signal="screen_exited" from="VisibilityNotifier2D" to="." method="_on_VisibilityNotifier2D_screen_exited"]
+[connection signal="finished" from="GetSupply" to="." method="_on_GetSupply_finished"]

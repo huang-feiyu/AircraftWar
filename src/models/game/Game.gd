@@ -22,11 +22,18 @@ func _process(delta):
 	$PlayHUD.call("update_hp")
 	$PlayHUD.call("update_score")
 
-	if GameManager.score > GameManager.BOSS_GENERATE_SCORE * GameManager.boss_count and !GameManager.is_boss_alive:
+	# boss
+	if GameManager.score > GameManager.BOSS_GENERATE_SCORE * (GameManager.boss_count ) and !GameManager.is_boss_alive:
 		emit_signal("boss_generate")
-
 	if !GameManager.is_boss_alive and GameManager.is_sound_on:
 		emit_signal("boss_bgm_stop")
+
+	# bomb
+	if GameManager.bomb_supply:
+		GameManager.bomb_supply = false
+		print("bomb supply")
+		get_tree().call_group("mobs", "end")
+		get_tree().call_group("elites", "end")
 
 # boss generate
 func _on_Game_boss_generate():

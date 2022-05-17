@@ -5,6 +5,8 @@ export(PackedScene) var hero_bullet_scene
 # internal member
 var dragging = false
 var is_playing_bullet_sound = false
+var is_bullet_prop = false
+var increase_bullet = 0
 
 # Hero: Attributes
 var hp = GameManager.HERO_MAX_HP
@@ -48,8 +50,28 @@ func _on_Hero_area_entered(area:Area2D):
 		decreases_hp(area.call("get_power"))
 		# print("EnemyBullet hit; Hero hp:", hp)
 		area.call("end")
-	if "Mob" in area.name:
+	elif "Mob" in area.name:
 		end()
+
+	# props
+	elif "Blood" in area.name:
+		decreases_hp(area.call("get_increase"))
+		area.call("end")
+	elif "Bullet" in area.name and not "Hero" in area.name:
+		increase_bullet = area.call("get_increase")
+		GameManager.hero_bullet_num += 0 if is_bullet_prop else increase_bullet
+		is_bullet_prop = true
+		area.call("end")
+		# start/reset timer
+		$BulletPropTimer.start()
+	elif "Bomb" in area.name:
+		GameManager.bomb_supply = true
+		area.call("end")
+
+# 5 seconds
+func _on_BulletPropTimer_timeout():
+	GameManager.hero_bullet_num = GameManager.HERO_INIT_BULLET_NUM
+	is_bullet_prop = false
 
 # init
 func start(pos):
