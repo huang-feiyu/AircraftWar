@@ -1,16 +1,11 @@
-extends Area2D
-
-# Bomb: Attributes
-var velocity = Vector2((1 if randi() % 2 == 1 else -1) * randi() % 100, 150)
+class_name Bomb extends FlyingObject
 
 func _ready():
+	velocity = Vector2((1 if randi() % 2 == 1 else -1) * randi() % 100, 150)
 	set_process(true)
 
 func _process(delta):
-	position.y += velocity.y * delta
-	position.x += velocity.x * delta
-	if position.x >= get_viewport().size.x * 0.9 || position.x <= get_viewport().size.x * 0.1:
-		velocity.x = -velocity.x
+	move(delta)
 
 func _on_BombSound_finished():
 	queue_free()

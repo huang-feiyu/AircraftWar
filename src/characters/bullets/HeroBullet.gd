@@ -1,18 +1,17 @@
-extends Area2D
+class_name HeroBullet extends FlyingObject
 
 # HeroBullet: Attributes
 var power = 0
-var velocity = Vector2(0, -300)
 
 # Called when the node enters the scene tree for the first time.
 func _ready():
+	velocity = Vector2(0, -300)
 	set_process(true)
 
 # Called every frame. 'delta' is the elapsed time since the previous frame.
 # aka. move_forward
 func _process(delta):
-	position.y += velocity.y * delta
-	position.x += velocity.x * delta
+	move(delta)
 
 # out of the boundary
 func _on_VisibilityNotifier2D_screen_exited():

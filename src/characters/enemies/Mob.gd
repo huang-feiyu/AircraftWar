@@ -1,43 +1,30 @@
-extends Area2D
-
-export(PackedScene) var enemy_bullet_scene
+class_name Mob extends Enemy
 
 # Mob: Attributes
-var hp = GameManager.MOB_MAX_HP
-var power = 30
-var velocity = Vector2(0, 150)
 var score_value = 10
 
-
-# Called when the node enters the scene tree for the first time.
+# init for every mob
 func _ready():
-	set_process(true)
+	hp = GameManager.MOB_MAX_HP
+	power = GameManager.MOB_INIT_POWER
+	velocity = Vector2(0, 125)
 	$BulletTimer.start()
 
-
-# Called every frame. 'delta' is the elapsed time since the previous frame.
+# move every frame
 func _process(delta):
-	position.y += velocity.y * delta
-	position.x += velocity.x * delta
+	move(delta)
 	if hp <= 0:
 		GameManager.score += score_value
-		print("Score:", GameManager.score)
 		end()
 
 # shoot bullets
 func _on_BulletTimer_timeout():
-	# print("Hero: shoot")
-	var bullet = enemy_bullet_scene.instance()
 	var pos = Vector2(position.x, position.y + 100)
-	bullet.start(pos, power)
-	get_parent().add_child(bullet)
+	shoot(pos)
 
 # crash detection
 func _on_Mob_area_entered(area:Area2D):
-	if "HeroBullet" in area.name:
-		hp -= area.power
-		decreases_hp(area.call("get_power"))
-		area.call("end")
+	bullet_detection(area)
 	if area.name == "Hero":
 		end()
 
@@ -47,20 +34,10 @@ func _on_VisibilityNotifier2D_screen_exited():
 
 # init
 func start(pos):
+	base_start(pos)
 	GameManager.enemy_num += 1
-	position = pos
 
 # death
 func end():
-	$BulletTimer.stop()
+	base_end()
 	GameManager.enemy_num -= 1
-	queue_free()
-	hide()
-
-# decrease hp
-func decreases_hp(damage):
-	hp -= damage
-
-# dead with score
-func dead_score():
-	decreases_hp(GameManager.MOB_MAX_HP)

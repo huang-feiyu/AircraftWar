@@ -14,7 +14,6 @@ signal boss_bgm_stop()
 func _ready():
 	screen_size = get_viewport().size
 	randomize()
-	new_game()
 
 # Called every frame. 'delta' is the elapsed time since the previous frame.
 func _process(delta):
@@ -39,7 +38,6 @@ func _process(delta):
 # boss generate
 func _on_Game_boss_generate():
 	GameManager.boss_count += 1
-	GameManager.boss_alive += 1
 	var boss = boss_scene.instance()
 	var pos = Vector2(rand_range(0.1, 0.9) * screen_size.x, rand_range(0.1, 0.2) * screen_size.y)
 	boss.start(pos)
@@ -72,6 +70,7 @@ func _on_BossBgmSound_finished():
 
 # start a game
 func new_game():
+	GameManager.score = 0
 	$Hero.start($StartPosition.position)
 	$StartTimer.start()
 	if GameManager.is_sound_on:
@@ -90,12 +89,10 @@ func _on_StartTimer_timeout():
 
 # new an enemy every 1 second
 func _on_EnemyTimer_timeout():
-	print("Enemy generate")
 	if GameManager.enemy_num > GameManager.MAX_ENEMY_NUM:
 		return
 	var enemy = elite_scene.instance() if rand_range(0, 1) > GameManager.ELITE_POSSIBILITY else\
 				mob_scene.instance()
-	print("Enemy generate: ", enemy.name)
 	var pos = Vector2(rand_range(0.1, 0.9) * screen_size.x, rand_range(0.1, 0.2) * screen_size.y)
 	enemy.start(pos)
 	add_child(enemy)

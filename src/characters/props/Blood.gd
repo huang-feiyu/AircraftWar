@@ -1,18 +1,14 @@
-extends Area2D
-
+class_name Blood extends FlyingObject
 
 # Blood: Attributes
 const increase_hp = 100
-var velocity = Vector2((1 if randi() % 2 == 1 else -1) * randi() % 100, 150)
 
 func _ready():
+	velocity = Vector2((1 if randi() % 2 == 1 else -1) * randi() % 100, 150)
 	set_process(true)
 
 func _process(delta):
-	position.y += velocity.y * delta
-	position.x += velocity.x * delta
-	if position.x >= get_viewport().size.x * 0.9 || position.x <= get_viewport().size.x * 0.1:
-		velocity.x = -velocity.x
+	move(delta)
 
 func _on_GetSupply_finished():
 	queue_free()

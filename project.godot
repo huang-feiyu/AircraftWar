@@ -8,6 +8,70 @@
 
 config_version=4
 
+_global_script_classes=[ {
+"base": "FlyingObject",
+"class": "Blood",
+"language": "GDScript",
+"path": "res://src/characters/props/Blood.gd"
+}, {
+"base": "FlyingObject",
+"class": "Bomb",
+"language": "GDScript",
+"path": "res://src/characters/props/Bomb.gd"
+}, {
+"base": "Enemy",
+"class": "Boss",
+"language": "GDScript",
+"path": "res://src/characters/enemies/Boss.gd"
+}, {
+"base": "FlyingObject",
+"class": "Bullet",
+"language": "GDScript",
+"path": "res://src/characters/props/Bullet.gd"
+}, {
+"base": "Enemy",
+"class": "Elite",
+"language": "GDScript",
+"path": "res://src/characters/enemies/Elite.gd"
+}, {
+"base": "FlyingObject",
+"class": "Enemy",
+"language": "GDScript",
+"path": "res://src/characters/enemies/Enemy.gd"
+}, {
+"base": "FlyingObject",
+"class": "EnemyBullet",
+"language": "GDScript",
+"path": "res://src/characters/bullets/EnemyBullet.gd"
+}, {
+"base": "Area2D",
+"class": "FlyingObject",
+"language": "GDScript",
+"path": "res://src/characters/FlyingObject.gd"
+}, {
+"base": "FlyingObject",
+"class": "HeroBullet",
+"language": "GDScript",
+"path": "res://src/characters/bullets/HeroBullet.gd"
+}, {
+"base": "Enemy",
+"class": "Mob",
+"language": "GDScript",
+"path": "res://src/characters/enemies/Mob.gd"
+} ]
+_global_script_class_icons={
+"Blood": "",
+"Bomb": "",
+"Boss": "",
+"Bullet": "",
+"Elite": "",
+"Enemy": "",
+"EnemyBullet": "",
+"FlyingObject": "",
+"HeroBullet": "",
+"Mob": ""
+}
+
 [application]
 
 config/name="AircraftWar"
@@ -26,6 +90,7 @@ window/handheld/orientation="portrait"
 [global]
 
 scene=false
+Window=false
 
 [input]
 
