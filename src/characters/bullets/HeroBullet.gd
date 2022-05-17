@@ -22,7 +22,6 @@ func _on_VisibilityNotifier2D_screen_exited():
 # init
 func start(pos, ipower):
 	position = pos
-	position.y -= 100
 	power = ipower
 
 # end

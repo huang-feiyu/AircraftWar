@@ -9,10 +9,6 @@ var is_playing_bullet_sound = false
 # Hero: Attributes
 var hp = GameManager.HERO_MAX_HP
 var power = 30
-var shoot_num = 1
-var score = 0
-
-signal is_dead
 
 # Called when the node enters the scene tree for the first time.
 func _ready():
@@ -40,9 +36,11 @@ func _input(event):
 # shoot
 func _on_BulletTimer_timeout():
 	# print("Hero: shoot")
-	var bullet = hero_bullet_scene.instance()
-	bullet.start(position, power)
-	get_parent().add_child(bullet)
+	for i in range(GameManager.hero_bullet_num):
+		var bullet = hero_bullet_scene.instance()
+		var pos = Vector2(position.x + (i - GameManager.hero_bullet_num / 2) * 40, position.y - 100)
+		bullet.start(pos, power)
+		get_parent().add_child(bullet)
 	if !is_playing_bullet_sound:
 		# play sound
 		$BulletSound.play()
@@ -70,6 +68,7 @@ func start(pos):
 # death
 func end():
 	hp = 0
+	GameManager.hero_hp = hp
 	$BulletTimer.stop()
 	queue_free()
 	hide()

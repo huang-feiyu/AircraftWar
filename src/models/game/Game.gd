@@ -1,6 +1,8 @@
 extends Node
 
 export(PackedScene) var mob_scene
+export(PackedScene) var elite_scene
+export(PackedScene) var boss_scene
 
 const MAX_ENEMY_NUM = 20
 
@@ -17,6 +19,15 @@ func _process(delta):
 	# death dectection
 	$PlayHUD.call("update_hp")
 	$PlayHUD.call("update_score")
+	# boss generate
+	if GameManager.score > GameManager.BOSS_GENERATE_SCORE * GameManager.boss_count:
+		GameManager.boss_count += 1
+		var boss = boss_scene.instance()
+		var pos = Vector2(rand_range(0.1, 0.9) * screen_size.x, rand_range(0.1, 0.2) * screen_size.y)
+		boss.start(pos)
+		add_child(boss)
+
+
 
 # start a game
 func new_game():
@@ -32,12 +43,15 @@ func game_over():
 func _on_StartTimer_timeout():
 	$EnemyTimer.start()
 
-# new a mob every 1 second
+# new an enemy every 1 second
 func _on_EnemyTimer_timeout():
+	print("Enemy generate")
 	if GameManager.enemy_num > MAX_ENEMY_NUM:
 		return
-	var mob = mob_scene.instance()
-	var pos = Vector2(rand_range(0, screen_size.x), rand_range(0.1, 0.2) * screen_size.y)
-	mob.start(pos)
-	add_child(mob)
+	var enemy = elite_scene.instance() if rand_range(0, 1) > GameManager.ELITE_POSSIBILITY else\
+				mob_scene.instance()
+	print("Enemy generate: ", enemy.name)
+	var pos = Vector2(rand_range(0.1, 0.9) * screen_size.x, rand_range(0.1, 0.2) * screen_size.y)
+	enemy.start(pos)
+	add_child(enemy)
 
