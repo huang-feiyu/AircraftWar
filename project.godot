@@ -75,11 +75,11 @@ _global_script_class_icons={
 [application]
 
 config/name="AircraftWar"
-run/main_scene="res://src/models/game/Game.tscn"
+run/main_scene="res://src/Main.tscn"
 
 [autoload]
 
-GameManager="*res://src/models/game/GameManager.gd"
+GameManager="*res://src/tools/GameManager.gd"
 
 [display]
 

@@ -16,7 +16,7 @@ animations = [ {
 radius = 51.0
 height = 0.0
 
-[node name="Blood" type="Area2D"]
+[node name="Blood" type="Area2D" groups=["all"]]
 position = Vector2( 557, 666 )
 script = ExtResource( 3 )
 

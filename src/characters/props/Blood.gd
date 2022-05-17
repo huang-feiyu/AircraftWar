@@ -23,7 +23,8 @@ func start(pos):
 
 # end
 func end():
-	$GetSupply.play()
+	if GameManager.is_sound_on:
+		$GetSupply.play()
 	hide()
 
 # get hp

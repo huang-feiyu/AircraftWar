@@ -7,7 +7,7 @@
 [ext_resource path="res://src/characters/props/Bullet.tscn" type="PackedScene" id=5]
 [ext_resource path="res://src/characters/props/Bomb.tscn" type="PackedScene" id=6]
 
-[node name="Elite" type="Area2D" groups=["elites"]]
+[node name="Elite" type="Area2D" groups=["all", "enemy"]]
 position = Vector2( 553, 776 )
 script = ExtResource( 2 )
 enemy_bullet_scene = ExtResource( 3 )

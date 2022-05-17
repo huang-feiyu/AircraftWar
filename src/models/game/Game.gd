@@ -5,10 +5,13 @@ export(PackedScene) var elite_scene
 export(PackedScene) var boss_scene
 
 var screen_size
+var is_game_over = false
 
 signal boss_generate()
 signal bgm_stop()
 signal boss_bgm_stop()
+
+signal game_over # to Main
 
 # Called when the node enters the scene tree for the first time.
 func _ready():
@@ -31,9 +34,7 @@ func _process(delta):
 	if GameManager.bomb_supply:
 		GameManager.bomb_supply = false
 		print("bomb supply")
-		get_tree().call_group("mobs", "end")
-		get_tree().call_group("elites", "end")
-		get_tree().call_group("bullets", "end")
+		get_tree().call_group("enemy", "end")
 
 # boss generate
 func _on_Game_boss_generate():
@@ -45,46 +46,10 @@ func _on_Game_boss_generate():
 	if GameManager.is_sound_on:
 		emit_signal("bgm_stop")
 
-func _on_Game_bgm_stop():
-	if $BgmSound.is_playing():
-		print("bgm playing, turn off")
-		$BgmSound.stop()
-	if not $BossBgmSound.is_playing():
-		$BossBgmSound.play()
-
-func _on_Game_boss_bgm_stop():
-	if $BossBgmSound.is_playing():
-		$BossBgmSound.stop()
-	if not $BgmSound.is_playing():
-		$BgmSound.play()
-
-# replay bgm
-func _on_BgmSound_finished():
-	if GameManager.boss_alive < 1:
-		$BgmSound.play()
-
-# replay boss bgm
-func _on_BossBgmSound_finished():
-	if GameManager.boss_alive >= 1:
-		$BossBgmSound.play()
-
-# start a game
-func new_game():
-	GameManager.score = 0
-	$Hero.start($StartPosition.position)
-	$StartTimer.start()
-	if GameManager.is_sound_on:
-		$BgmSound.play()
-
-# end the game
-func game_over():
-	$StartTimer.stop()
-	$EnemyTimer.stop()
-	$BgmSound.stop()
-	$BossBgmSound.stop()
-
 # wait 1 seconds for the game to start
 func _on_StartTimer_timeout():
+	$BgImg.texture = load(GameManager.bg_img)
+	$PlayHUD.start_game()
 	$EnemyTimer.start()
 
 # new an enemy every 1 second
@@ -97,3 +62,58 @@ func _on_EnemyTimer_timeout():
 	enemy.start(pos)
 	add_child(enemy)
 
+# game over
+func _on_Hero_hero_dead():
+	game_over()
+
+# start a game
+func new_game():
+	GameManager.score = 0
+	$StartTimer.start()
+	$Hero.start($StartPosition.position)
+	print(GameManager.is_sound_on)
+	if GameManager.is_sound_on:
+		$BgmSound.play()
+	else:
+		$BgmSound.stop()
+
+# end the game
+func game_over():
+	emit_signal("game_over")
+	is_game_over = true
+	if GameManager.is_sound_on:
+		$GameOverSound.play()
+	$StartTimer.stop()
+	$EnemyTimer.stop()
+	get_tree().call_group("all", "queue_free")
+	stop_music()
+
+
+# stop all music
+func stop_music():
+	$BgmSound.stop()
+	$BossBgmSound.stop()
+
+# music
+func _on_Game_bgm_stop():
+	if $BgmSound.is_playing():
+		print("bgm playing, turn off")
+		$BgmSound.stop()
+	if not $BossBgmSound.is_playing() and GameManager.is_sound_on:
+		$BossBgmSound.play()
+
+func _on_Game_boss_bgm_stop():
+	if $BossBgmSound.is_playing():
+		$BossBgmSound.stop()
+	if not $BgmSound.is_playing() and GameManager.is_sound_on and not is_game_over:
+		$BgmSound.play()
+
+# replay bgm
+func _on_BgmSound_finished():
+	if GameManager.boss_alive < 1 and GameManager.is_sound_on and not is_game_over:
+		$BgmSound.play()
+
+# replay boss bgm
+func _on_BossBgmSound_finished():
+	if GameManager.boss_alive >= 1 and GameManager.is_sound_on and not is_game_over:
+		$BossBgmSound.play()

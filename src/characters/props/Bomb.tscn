@@ -16,7 +16,7 @@ animations = [ {
 [sub_resource type="CapsuleShape2D" id=2]
 radius = 37.0
 
-[node name="Bomb" type="Area2D"]
+[node name="Bomb" type="Area2D" groups=["all"]]
 position = Vector2( 539, 541 )
 script = ExtResource( 4 )
 

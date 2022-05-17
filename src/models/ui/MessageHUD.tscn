@@ -89,11 +89,15 @@ margin_top = -200.0
 margin_right = 111.0
 margin_bottom = -140.0
 custom_fonts/font = SubResource( 4 )
+action_mode = 0
 text = "Music"
+align = 2
+expand_icon = true
 
 [node name="StartTimer" type="Timer" parent="."]
 
 [connection signal="pressed" from="EasyButton" to="." method="_on_EasyButton_pressed"]
 [connection signal="pressed" from="NormalButton" to="." method="_on_NormalButton_pressed"]
 [connection signal="pressed" from="HardButton" to="." method="_on_HardButton_pressed"]
+[connection signal="toggled" from="MusicCheck" to="." method="_on_MusicCheck_toggled"]
 [connection signal="timeout" from="StartTimer" to="." method="_on_StartTimer_timeout"]

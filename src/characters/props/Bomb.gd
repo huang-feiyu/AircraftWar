@@ -20,6 +20,7 @@ func start(pos):
 
 # end
 func end():
-	$GetSupply.play()
-	$BombSound.play()
+	if GameManager.is_sound_on:
+		$GetSupply.play()
+		$BombSound.play()
 	hide()

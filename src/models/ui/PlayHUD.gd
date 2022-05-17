@@ -1,12 +1,17 @@
 extends CanvasLayer
 
+func _ready():
+	$AttributeLabel.hide()
+	$ScoreLabel.hide()
+	$HPBar.hide()
+
 func start_game():
-	$AtrributeLabel.show()
+	$AttributeLabel.show()
 	$ScoreLabel.show()
 	$HPBar.show()
 
 func game_over():
-	$AtrributeLabel.hide()
+	$AttributeLabel.hide()
 	$ScoreLabel.hide()
 	$HPBar.hide()
 

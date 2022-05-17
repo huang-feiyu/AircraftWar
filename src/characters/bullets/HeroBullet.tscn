@@ -16,7 +16,7 @@ animations = [ {
 radius = 13.0
 height = 22.0
 
-[node name="HeroBullet" type="Area2D"]
+[node name="HeroBullet" type="Area2D" groups=["all"]]
 position = Vector2( 530, 798 )
 script = ExtResource( 2 )
 

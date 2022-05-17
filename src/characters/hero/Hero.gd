@@ -12,6 +12,8 @@ var increase_bullet = 0
 var hp = GameManager.HERO_MAX_HP
 var power = GameManager.HERO_INIT_POWER
 
+signal hero_dead
+
 # Called when the node enters the scene tree for the first time.
 func _ready():
 	set_process(true)
@@ -76,6 +78,7 @@ func start(pos):
 # death
 func end():
 	hp = 0
+	emit_signal("hero_dead")
 	GameManager.hero_hp = hp
 	$BulletTimer.stop()
 	queue_free()
