@@ -16,7 +16,7 @@ animations = [ {
 radius = 270.0
 height = 352.0
 
-[node name="Boss" type="Area2D"]
+[node name="Boss" type="Area2D" groups=["boss"]]
 position = Vector2( 530, 325 )
 script = ExtResource( 2 )
 enemy_bullet_scene = ExtResource( 3 )

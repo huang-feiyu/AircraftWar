@@ -52,6 +52,7 @@ func end():
 	$BulletTimer.stop()
 	queue_free()
 	hide()
+	GameManager.is_boss_alive = false
 
 # decrease hp
 func decreases_hp(damage):

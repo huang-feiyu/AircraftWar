@@ -1,4 +1,4 @@
-[gd_scene load_steps=7 format=2]
+[gd_scene load_steps=9 format=2]
 
 [ext_resource path="res://src/characters/hero/Hero.tscn" type="PackedScene" id=1]
 [ext_resource path="res://src/models/game/Game.gd" type="Script" id=2]
@@ -6,6 +6,8 @@
 [ext_resource path="res://src/models/ui/PlayHUD.tscn" type="PackedScene" id=4]
 [ext_resource path="res://src/characters/enemies/Elite.tscn" type="PackedScene" id=5]
 [ext_resource path="res://src/characters/enemies/Boss.tscn" type="PackedScene" id=6]
+[ext_resource path="res://assets/audio/bgm/bgm_boss.wav" type="AudioStream" id=7]
+[ext_resource path="res://assets/audio/bgm/bgm.wav" type="AudioStream" id=8]
 
 [node name="Game" type="Node"]
 script = ExtResource( 2 )
@@ -26,5 +28,16 @@ position = Vector2( 540, 1824 )
 
 [node name="PlayHUD" parent="." instance=ExtResource( 4 )]
 
+[node name="BgmSound" type="AudioStreamPlayer" parent="."]
+stream = ExtResource( 8 )
+
+[node name="BossBgmSound" type="AudioStreamPlayer" parent="."]
+stream = ExtResource( 7 )
+
+[connection signal="bgm_stop" from="." to="." method="_on_Game_bgm_stop"]
+[connection signal="boss_bgm_stop" from="." to="." method="_on_Game_boss_bgm_stop"]
+[connection signal="boss_generate" from="." to="." method="_on_Game_boss_generate"]
 [connection signal="timeout" from="EnemyTimer" to="." method="_on_EnemyTimer_timeout"]
 [connection signal="timeout" from="StartTimer" to="." method="_on_StartTimer_timeout"]
+[connection signal="finished" from="BgmSound" to="." method="_on_BgmSound_finished"]
+[connection signal="finished" from="BossBgmSound" to="." method="_on_BossBgmSound_finished"]
