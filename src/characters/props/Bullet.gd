@@ -1,5 +1,7 @@
 class_name Bullet extends FlyingObject
 
+var is_dead = false
+
 # Bullet: Attributes
 const increase_bullet = 2
 
@@ -23,8 +25,9 @@ func start(pos):
 
 # end
 func end():
-	if GameManager.is_sound_on:
+	if GameManager.is_sound_on and not is_dead:
 		$GetSupply.play()
+	is_dead = true
 	hide()
 
 # get bullet

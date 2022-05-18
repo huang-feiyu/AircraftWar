@@ -31,7 +31,7 @@
 └── project.godot
 ```
 
-## 优化记录
+## 优化日志
 
 ### 2022-05-17
 
@@ -67,18 +67,20 @@ Enemy extends FlyingObject
 
 创建一个子弹基类 `BaseBullet` 重写 `move` 方法.
 
+2. 直射子弹有尾巴
 
+改为水平发射.
 
+## 实现日志
 
+> 已实现基本功能.
 
+### 2022-05-18
 
+实现排行榜. 对于数据存储模式, 准备采用 [SQLite](https://github.com/2shady4u/godot-sqlite), 此次还不予实现.
 
-
-
-
-
-
-
-
-
+```
+# select by difficulty
+Rank | Name | Score | Date |
+```
 

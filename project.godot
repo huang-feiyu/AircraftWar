@@ -93,6 +93,10 @@ window/size/width=1080
 window/size/height=2280
 window/handheld/orientation="portrait"
 
+[editor_plugins]
+
+enabled=PoolStringArray( "res://addons/godot_table/plugin.cfg" )
+
 [global]
 
 scene=false

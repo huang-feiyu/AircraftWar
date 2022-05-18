@@ -50,6 +50,8 @@ func _on_Game_boss_generate():
 func _on_StartTimer_timeout():
 	$PlayHUD.start_game()
 	$EnemyTimer.start()
+	$StartTimer.stop()
+	$Hero.start($StartPosition.position)
 
 # new an enemy every 1 second
 func _on_EnemyTimer_timeout():
@@ -73,7 +75,6 @@ func new_game():
 		$BgmSound.play()
 	else:
 		$BgmSound.stop()
-	$Hero.start($StartPosition.position)
 	$BgImg.texture = load(GameManager.bg_img)
 	$BgImg.rect_scale = Vector2(screen_size.x / 512, screen_size.y / 768)
 
@@ -85,6 +86,7 @@ func game_over():
 		$GameOverSound.play()
 	$StartTimer.stop()
 	$EnemyTimer.stop()
+	$PlayHUD.game_over()
 	get_tree().call_group("all", "queue_free")
 	stop_music()
 

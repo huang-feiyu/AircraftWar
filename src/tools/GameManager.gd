@@ -19,7 +19,7 @@ var boss_alive = 0
 const HERO_MAX_HP = 100000
 const HERO_MAX_POWER = 50
 const HERO_INIT_POWER = 30
-const HERO_INIT_BULLET_NUM = 5
+const HERO_INIT_BULLET_NUM = 3
 
 const MOB_MAX_HP = 100
 const ELITE_MAX_HP = 500

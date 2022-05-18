@@ -1,5 +1,7 @@
 class_name Bomb extends FlyingObject
 
+var is_dead = false
+
 func _ready():
 	velocity = Vector2((1 if randi() % 2 == 1 else -1) * randi() % 100, 150)
 	set_process(true)
@@ -20,7 +22,8 @@ func start(pos):
 
 # end
 func end():
-	if GameManager.is_sound_on:
+	if GameManager.is_sound_on and not is_dead:
 		$GetSupply.play()
 		$BombSound.play()
+	is_dead = true
 	hide()

@@ -29,6 +29,7 @@ func _on_HardButton_pressed():
 	$StartTimer.start()
 
 func _on_StartTimer_timeout():
+	$StartTimer.stop()
 	$StartMessage.hide()
 	$EasyButton.hide()
 	$NormalButton.hide()
@@ -49,6 +50,9 @@ func show_start_message():
 
 func show_end_message():
 	$EndMessage.show()
+
+func hide_end_message():
+	$EndMessage.hide()
 
 func change_bg_img():
 	if GameManager.difficulty == 0:

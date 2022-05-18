@@ -75,6 +75,7 @@ func _on_Hero_area_entered(area:Area2D):
 func _on_BulletPropTimer_timeout():
 	GameManager.hero_bullet_num = GameManager.HERO_INIT_BULLET_NUM
 	is_bullet_prop = false
+	$BulletPropTimer.stop()
 
 # init
 func start(pos):

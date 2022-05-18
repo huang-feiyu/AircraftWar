@@ -2,6 +2,7 @@ class_name Blood extends FlyingObject
 
 # Blood: Attributes
 const increase_hp = 100
+var is_dead = false
 
 func _ready():
 	velocity = Vector2((1 if randi() % 2 == 1 else -1) * randi() % 100, 150)
@@ -23,8 +24,9 @@ func start(pos):
 
 # end
 func end():
-	if GameManager.is_sound_on:
+	if GameManager.is_sound_on and not is_dead:
 		$GetSupply.play()
+	is_dead = true
 	hide()
 
 # get hp
