@@ -57,7 +57,6 @@ signal restart
 func _ready():
 	$Table.hide()
 	$DifficultyLabel.hide()
-	$NextGameButton.hide()
 
 # click to pop up dialog to ensure deletion
 func _on_Table_CLICK_ROW(value):
@@ -72,11 +71,6 @@ func _on_DeletionConfirm_confirmed():
 
 func _on_Timer_timeout():
 	$Timer.stop()
-
-func _on_NextGameButton_toggled(button_pressed:bool):
-	if button_pressed:
-		emit_signal("restart")
-		end()
 
 # table_array => represent_table
 func show_represent_table():
@@ -100,11 +94,10 @@ func delete_row():
 # start
 func start():
 	print("RankList: start")
-	$DifficultyLabel.text = "\nEasy" if GameManager.difficulty == 0 else\
+	$DifficultyLabel.text =("\nEasy" if GameManager.difficulty == 0 else\
 							"\nNormal" if GameManager.difficulty == 1 else\
-							"\nHard" + " Mode"
+							"\nHard") + " Mode"
 	$Table.show()
-	$NextGameButton.show()
 	$DifficultyLabel.show()
 	show_represent_table()
 
@@ -112,7 +105,6 @@ func start():
 func end():
 	print("RankList: end")
 	$Table.hide()
-	$NextGameButton.hide()
 	$DeletionConfirm.hide()
 	$DifficultyLabel.hide()
 	$Timer.stop()

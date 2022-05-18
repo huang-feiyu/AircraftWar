@@ -25,7 +25,6 @@ __meta__ = {
 "_edit_group_": true
 }
 hero_bullet_scene = ExtResource( 3 )
-bullet_strategy_scene = ExtResource( 4 )
 
 [node name="AnimatedSprite" type="AnimatedSprite" parent="."]
 frames = SubResource( 1 )

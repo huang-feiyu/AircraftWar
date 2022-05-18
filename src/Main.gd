@@ -1,5 +1,8 @@
 extends Node
 
+func _ready():
+	$NextGameButton.hide()
+
 func _on_MessageHUD_start_game():
 	print("Difficulty: ", GameManager.difficulty)
 	print("Music: ", GameManager.is_sound_on)
@@ -12,15 +15,21 @@ func _on_MessageHUD_music_changed():
 
 
 func _on_Game_game_over():
+	print("Main get game_over")
 	$GameOverTimer.start()
 	$MessageHUD.show_end_message()
 
 func _on_GameOverTimer_timeout():
-	$MessageHUD.hide_end_message()
 	$GameOverTimer.stop()
+	$MessageHUD.hide_end_message()
 	$RankList.start()
+	$NextGameButton.show()
 
-func _on_RankList_restart():
+func _on_NextGameButton_button_up():
 	print("Difficulty: ", GameManager.difficulty)
 	print("Music: ", GameManager.is_sound_on)
+	print("Restart")
 	$MessageHUD.show_start_message()
+	$RankList.end()
+	$NextGameButton.hide()
+

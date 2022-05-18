@@ -11,6 +11,7 @@ var increase_bullet = 0
 # Hero: Attributes
 var hp = GameManager.HERO_MAX_HP
 var power = GameManager.HERO_INIT_POWER
+var is_hero_dead = false
 
 signal hero_dead
 
@@ -21,7 +22,7 @@ func _ready():
 
 # death detection
 func _process(delta):
-	if hp <= 0:
+	if hp <= 0 and not is_hero_dead:
 		end()
 
 # move_forward: dragging
@@ -79,6 +80,10 @@ func _on_BulletPropTimer_timeout():
 
 # init
 func start(pos):
+	is_hero_dead = false
+	print("init hero")
+	hp = GameManager.HERO_MAX_HP
+	GameManager.hero_hp = hp
 	position = pos
 	$BulletTimer.start()
 	show()
@@ -87,10 +92,11 @@ func start(pos):
 func end():
 	hp = 0
 	emit_signal("hero_dead")
+	print("hero emit hero_dead")
 	GameManager.hero_hp = hp
 	$BulletTimer.stop()
-	queue_free()
 	hide()
+	is_hero_dead = true
 
 # decrease hp
 func decreases_hp(damage):
