@@ -1,4 +1,4 @@
-class_name EnemyBullet extends FlyingObject
+class_name EnemyBullet extends BaseBullet
 
 # EnemyBullet: Attributes
 var power = 0

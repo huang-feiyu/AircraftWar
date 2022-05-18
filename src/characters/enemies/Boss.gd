@@ -21,9 +21,15 @@ func _process(delta):
 
 # shoot bullets
 func _on_BulletTimer_timeout():
+	var bullets = []
 	for i in range(boss_bullet_num):
+		var bullet = enemy_bullet_scene.instance()
 		var pos = Vector2(position.x + (i - boss_bullet_num / 2) * 40, position.y + 200)
-		shoot(pos)
+		bullet.start(pos, power)
+		get_parent().add_child(bullet)
+		bullets.append(bullet)
+	# strategy
+	$BulletStrategy.scattering(bullets)
 
 # crash detection
 func _on_Boss_area_entered(area:Area2D):

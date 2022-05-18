@@ -36,11 +36,18 @@ func _input(event):
 
 # shoot
 func _on_BulletTimer_timeout():
+	var bullets = []
 	for i in range(GameManager.hero_bullet_num):
 		var bullet = hero_bullet_scene.instance()
-		var pos = Vector2(position.x + (i - GameManager.hero_bullet_num / 2) * 40, position.y - 100)
+		bullets.append(bullet)
+		var pos = Vector2(position.x + (i - GameManager.hero_bullet_num / 2) * 40, position.y - 80)
 		bullet.start(pos, power)
 		get_parent().add_child(bullet)
+	# bullet strategy
+	if is_bullet_prop:
+		$BulletStrategy.scattering(bullets)
+	else:
+		$BulletStrategy.straight(bullets)
 
 # crash detection
 func _on_Hero_area_entered(area:Area2D):

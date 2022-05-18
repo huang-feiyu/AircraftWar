@@ -10,6 +10,11 @@ config_version=4
 
 _global_script_classes=[ {
 "base": "FlyingObject",
+"class": "BaseBullet",
+"language": "GDScript",
+"path": "res://src/characters/bullets/BaseBullet.gd"
+}, {
+"base": "FlyingObject",
 "class": "Blood",
 "language": "GDScript",
 "path": "res://src/characters/props/Blood.gd"
@@ -39,7 +44,7 @@ _global_script_classes=[ {
 "language": "GDScript",
 "path": "res://src/characters/enemies/Enemy.gd"
 }, {
-"base": "FlyingObject",
+"base": "BaseBullet",
 "class": "EnemyBullet",
 "language": "GDScript",
 "path": "res://src/characters/bullets/EnemyBullet.gd"
@@ -49,7 +54,7 @@ _global_script_classes=[ {
 "language": "GDScript",
 "path": "res://src/characters/FlyingObject.gd"
 }, {
-"base": "FlyingObject",
+"base": "BaseBullet",
 "class": "HeroBullet",
 "language": "GDScript",
 "path": "res://src/characters/bullets/HeroBullet.gd"
@@ -60,6 +65,7 @@ _global_script_classes=[ {
 "path": "res://src/characters/enemies/Mob.gd"
 } ]
 _global_script_class_icons={
+"BaseBullet": "",
 "Blood": "",
 "Bomb": "",
 "Boss": "",
@@ -91,6 +97,7 @@ window/handheld/orientation="portrait"
 
 scene=false
 Window=false
+emulator=false
 
 [input]
 
@@ -103,4 +110,3 @@ mouse={
 [input_devices]
 
 pointing/emulate_touch_from_mouse=true
-pointing/emulate_mouse_from_touch=false

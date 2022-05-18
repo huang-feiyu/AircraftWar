@@ -61,10 +61,11 @@ Blood, Bullet, Bomb extends FlyingObject
 Enemy extends FlyingObject
 ```
 
-3. 
+### 2022-05-18
 
+1. 子弹撞墙反弹
 
-
+创建一个子弹基类 `BaseBullet` 重写 `move` 方法.
 
 
 

@@ -29,7 +29,6 @@ func _on_HardButton_pressed():
 	$StartTimer.start()
 
 func _on_StartTimer_timeout():
-	print("Difficulty", GameManager.difficulty)
 	$StartMessage.hide()
 	$EasyButton.hide()
 	$NormalButton.hide()
@@ -39,7 +38,6 @@ func _on_StartTimer_timeout():
 func _on_MusicCheck_toggled(button_pressed):
 	GameManager.is_sound_on = not GameManager.is_sound_on
 	emit_signal("music_changed")
-	print("Music: ", GameManager.is_sound_on)
 
 func show_start_message():
 	$StartMessage.show()

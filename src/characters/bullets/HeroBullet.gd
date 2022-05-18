@@ -1,4 +1,4 @@
-class_name HeroBullet extends FlyingObject
+class_name HeroBullet extends BaseBullet
 
 # HeroBullet: Attributes
 var power = 0
