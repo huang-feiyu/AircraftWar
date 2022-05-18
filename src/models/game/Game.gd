@@ -48,8 +48,6 @@ func _on_Game_boss_generate():
 
 # wait 1 seconds for the game to start
 func _on_StartTimer_timeout():
-	$BgImg.texture = load(GameManager.bg_img)
-	$BgImg.rect_scale = Vector2(screen_size.x / 512, screen_size.y / 768)
 	$PlayHUD.start_game()
 	$EnemyTimer.start()
 
@@ -76,6 +74,8 @@ func new_game():
 	else:
 		$BgmSound.stop()
 	$Hero.start($StartPosition.position)
+	$BgImg.texture = load(GameManager.bg_img)
+	$BgImg.rect_scale = Vector2(screen_size.x / 512, screen_size.y / 768)
 
 # end the game
 func game_over():

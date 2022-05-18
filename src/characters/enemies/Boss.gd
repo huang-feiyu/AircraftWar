@@ -29,7 +29,10 @@ func _on_BulletTimer_timeout():
 		get_parent().add_child(bullet)
 		bullets.append(bullet)
 	# strategy
-	$BulletStrategy.scattering(bullets)
+	if randi() % 2 == 1:
+		$BulletStrategy.scattering(bullets)
+	else:
+		$BulletStrategy.straight(bullets)
 
 # crash detection
 func _on_Boss_area_entered(area:Area2D):

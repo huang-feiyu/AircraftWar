@@ -78,6 +78,7 @@ margin_bottom = 310.5
 custom_fonts/font = SubResource( 3 )
 text = "Game
 Over"
+align = 1
 
 [node name="MusicCheck" type="CheckButton" parent="."]
 anchor_left = 0.5

@@ -1,10 +1,8 @@
 extends Node
 
+# nothing done here
 func straight(bullets):
-	var prev = bullets[bullets.size() / 2]
-	for bullet in bullets:
-		bullet.position = Vector2(prev.position.x, prev.position.y - 10)
-		prev = bullet
+	bullets = bullets
 
 # nothing done here
 func scattering(bullets):
