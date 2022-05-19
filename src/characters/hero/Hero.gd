@@ -83,7 +83,6 @@ func start(pos):
 	is_hero_dead = false
 	print("init hero")
 	hp = GameManager.HERO_MAX_HP
-	GameManager.hero_hp = hp
 	position = pos
 	$BulletTimer.start()
 	show()

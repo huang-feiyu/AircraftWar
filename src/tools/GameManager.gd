@@ -1,10 +1,11 @@
 extends Node
 
+# init by users
 var difficulty = 0 # 0 => easy; 1 => medium; 2 => hard
+var is_sound_on = false
 var bg_img = "res://assets/img/bg/bg.jpg"
 
 var score = 0
-var is_sound_on = false
 var bomb_supply = false
 
 # Hero
@@ -38,4 +39,13 @@ const MAX_ENEMY_NUM = 20
 const ELITE_POSSIBILITY = 0.5
 const ELITE_PROP_POSSIBILITY = 0.3
 
-const BOSS_GENERATE_SCORE = 1000
+const BOSS_GENERATE_SCORE = 100
+
+func init():
+	score = 0
+	bomb_supply = false
+	hero_hp = HERO_MAX_HP
+	hero_bullet_num = HERO_INIT_BULLET_NUM
+	enemy_num = 0
+	boss_count = 0
+	boss_alive = 0
