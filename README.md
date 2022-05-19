@@ -14,22 +14,30 @@
 .
 ├── LICENSE
 ├── README.md
-├── addons
-├── assets
-│   ├── audio
-│   ├── fonts
-│   └── img
-├── src
-│   ├── characters
-│   │   ├── bullets
-│   │   ├── enemies
-│   │   ├── hero
-│   │   └── props
-│   └── models
-│       ├── game
-│       └── ui
+├── addons/
+│   └── godot_table/
+├── assets/
+│   ├── audio/
+│   ├── fonts/
+│   └── img/
+├── src/
+│   ├── Main.gd
+│   ├── Main.tscn
+│   ├── characters/
+│   │   ├── FlyingObject.gd
+│   │   ├── bullets/
+│   │   ├── enemies/
+│   │   ├── hero/
+│   │   └── props/
+│   ├── models/
+│   │   ├── dao/
+│   │   ├── game/
+│   │   └── ui/
+│   └── tools/
+│       ├── DifficultyManager.gd
+│       └── GameManager.gd
 └── project.godot
-```
+ ```
 
 ## 优化日志
 
@@ -70,6 +78,12 @@ Enemy extends FlyingObject
 2. 直射子弹有尾巴
 
 改为水平发射.
+
+### 2022-05-19
+
+1. Restart 后不产生 boss
+
+`GameManager` 中需要一个初始化方法.
 
 ## 实现日志
 
