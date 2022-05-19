@@ -49,6 +49,7 @@ func show_start_message():
 	$EndMessage.hide()
 
 func show_end_message():
+	print("End Score: ", GameManager.score)
 	$EndMessage.show()
 
 func hide_end_message():

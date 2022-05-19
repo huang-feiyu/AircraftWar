@@ -70,7 +70,7 @@ func _on_Hero_hero_dead():
 
 # start a game
 func new_game():
-	GameManager.score = 0
+	GameManager.init()
 	$StartTimer.start()
 	if GameManager.is_sound_on:
 		$BgmSound.play()
@@ -92,11 +92,6 @@ func game_over():
 	$PlayHUD.game_over()
 	get_tree().call_group("all", "queue_free")
 	stop_music()
-
-# stop all music
-func stop_music():
-	$BgmSound.stop()
-	$BossBgmSound.stop()
 
 # music
 func _on_Game_bgm_stop():
@@ -121,3 +116,8 @@ func _on_BgmSound_finished():
 func _on_BossBgmSound_finished():
 	if GameManager.boss_alive >= 1 and GameManager.is_sound_on and not is_game_over:
 		$BossBgmSound.play()
+
+# stop all music
+func stop_music():
+	$BgmSound.stop()
+	$BossBgmSound.stop()
