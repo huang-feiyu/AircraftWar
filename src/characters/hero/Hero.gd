@@ -4,9 +4,7 @@ export(PackedScene) var hero_bullet_scene
 
 # internal member
 var dragging = false
-var is_playing_bullet_sound = false
 var is_bullet_prop = false
-var increase_bullet = 0
 
 # Hero: Attributes
 var hp = GameManager.HERO_MAX_HP
@@ -37,12 +35,12 @@ func _input(event):
 
 # shoot
 func _on_BulletTimer_timeout():
+	var bullet_num = GameManager.hero_bullet_num
 	var bullets = []
-	for i in range(GameManager.hero_bullet_num):
+	for i in range(bullet_num):
 		var bullet = hero_bullet_scene.instance()
+		bullet.start(Vector2(position.x + (i - bullet_num / 2) * 40, position.y - 80), power)
 		bullets.append(bullet)
-		var pos = Vector2(position.x + (i - GameManager.hero_bullet_num / 2) * 40, position.y - 80)
-		bullet.start(pos, power)
 		get_parent().add_child(bullet)
 	# bullet strategy
 	if is_bullet_prop:
@@ -57,20 +55,8 @@ func _on_Hero_area_entered(area:Area2D):
 		area.call("end")
 	elif "Mob" in area.name or "Boss" in area.name or "Elite" in area.name:
 		end()
-
-	# props
-	elif "Blood" in area.name:
-		decreases_hp(area.call("get_increase"))
-		area.call("end")
-	elif "Bullet" in area.name and not "Hero" in area.name:
-		increase_bullet = area.call("get_increase")
-		GameManager.hero_bullet_num += 0 if is_bullet_prop else increase_bullet
-		is_bullet_prop = true
-		area.call("end")
-		$BulletPropTimer.start()
-	elif "Bomb" in area.name:
-		GameManager.bomb_supply = true
-		area.call("end")
+	else:
+		crash_prop(area)
 
 # 5 seconds
 func _on_BulletPropTimer_timeout():
@@ -80,22 +66,23 @@ func _on_BulletPropTimer_timeout():
 
 # init
 func start(pos):
-	is_hero_dead = false
 	print("init hero")
 	hp = GameManager.HERO_MAX_HP
 	position = pos
+	is_hero_dead = false
 	$BulletTimer.start()
 	show()
 
 # death
 func end():
+	print("init dead")
 	hp = 0
-	emit_signal("hero_dead")
-	print("hero emit hero_dead")
 	GameManager.hero_hp = hp
+	is_hero_dead = true
 	$BulletTimer.stop()
 	hide()
-	is_hero_dead = true
+
+	emit_signal("hero_dead")
 
 # decrease hp
 func decreases_hp(damage):
@@ -104,3 +91,17 @@ func decreases_hp(damage):
 	else:
 		hp -= damage
 	GameManager.hero_hp = hp
+
+func crash_prop(prop):
+	# props
+	if "Blood" in prop.name:
+		decreases_hp(prop.call("get_increase"))
+		prop.call("end")
+	elif "Bullet" in prop.name and not "Hero" in prop.name:
+		GameManager.hero_bullet_num += 0 if is_bullet_prop else prop.call("get_increase")
+		is_bullet_prop = true
+		prop.call("end")
+		$BulletPropTimer.start() # restart bullet prop timer
+	elif "Bomb" in prop.name:
+		GameManager.bomb_supply = true
+		prop.call("end")

@@ -24,10 +24,9 @@ func _on_BulletTimer_timeout():
 	var bullets = []
 	for i in range(boss_bullet_num):
 		var bullet = enemy_bullet_scene.instance()
-		var pos = Vector2(position.x + (i - boss_bullet_num / 2) * 40, position.y + 200)
-		bullet.start(pos, power)
-		get_parent().add_child(bullet)
+		bullet.start(Vector2(position.x + (i - boss_bullet_num / 2) * 40, position.y + 200), power)
 		bullets.append(bullet)
+		get_parent().add_child(bullet)
 	# strategy
 	if randi() % 2 == 1:
 		$BulletStrategy.scattering(bullets)
