@@ -85,6 +85,14 @@ Enemy extends FlyingObject
 
 `GameManager` 中需要一个初始化方法.
 
+### 2022-05-24
+
+0. 测试 Node 是否能够继承
+
+1. 游戏属性管理过于分散
+
+
+
 ## 实现日志
 
 > 已实现基本功能.
