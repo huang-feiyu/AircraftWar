@@ -1,4 +1,4 @@
-[gd_scene load_steps=7 format=2]
+[gd_scene load_steps=8 format=2]
 
 [ext_resource path="res://assets/fonts/Xolonium-Regular.ttf" type="DynamicFontData" id=1]
 [ext_resource path="res://src/models/ui/MessageHUD.gd" type="Script" id=2]
@@ -16,6 +16,10 @@ font_data = SubResource( 2 )
 
 [sub_resource type="DynamicFont" id=4]
 size = 24
+font_data = ExtResource( 1 )
+
+[sub_resource type="DynamicFont" id=5]
+size = 64
 font_data = ExtResource( 1 )
 
 [node name="MessageHUD" type="CanvasLayer"]
@@ -101,9 +105,22 @@ wait_time = 0.5
 
 [node name="EndTimer" type="Timer" parent="."]
 
+[node name="NextGameButton" type="Button" parent="."]
+anchor_left = 0.5
+anchor_top = 1.0
+anchor_right = 0.5
+anchor_bottom = 1.0
+margin_left = -139.5
+margin_top = -308.5
+margin_right = 118.5
+margin_bottom = -182.5
+custom_fonts/font = SubResource( 5 )
+text = "Restart"
+
 [connection signal="pressed" from="EasyButton" to="." method="_on_EasyButton_pressed"]
 [connection signal="pressed" from="NormalButton" to="." method="_on_NormalButton_pressed"]
 [connection signal="pressed" from="HardButton" to="." method="_on_HardButton_pressed"]
 [connection signal="toggled" from="MusicCheck" to="." method="_on_MusicCheck_toggled"]
 [connection signal="timeout" from="StartTimer" to="." method="_on_StartTimer_timeout"]
 [connection signal="timeout" from="EndTimer" to="." method="_on_EndTimer_timeout"]
+[connection signal="button_up" from="NextGameButton" to="." method="_on_NextGameButton_button_up"]

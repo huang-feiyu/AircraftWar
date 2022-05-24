@@ -3,6 +3,7 @@ extends CanvasLayer
 const bg_dir = "res://assets/img/bg/"
 
 signal start_game
+signal restart_game()
 signal music_changed
 
 func _ready():
@@ -39,6 +40,7 @@ func show_start_message():
 	$HardButton.show()
 	$MusicCheck.show()
 	$EndMessage.hide()
+	$NextGameButton.hide()
 
 func show_end_message():
 	print("End Score: ", GameManager.score)
@@ -46,7 +48,14 @@ func show_end_message():
 	$EndMessage.show()
 
 func _on_EndTimer_timeout():
+	$EndTimer.stop()
 	$EndMessage.hide()
+	$NextGameButton.show()
+
+func _on_NextGameButton_button_up():
+	print("\nRestart")
+	$NextGameButton.hide()
+	emit_signal("restart_game")
 
 func start_game():
 	if GameManager.difficulty == 0:
