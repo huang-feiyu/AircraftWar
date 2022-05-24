@@ -19,9 +19,9 @@ script = ExtResource( 3 )
 [node name="DifficultyLabel" type="Label" parent="."]
 anchor_left = 0.5
 anchor_right = 0.5
-margin_left = -376.0
-margin_right = 376.0
-margin_bottom = 155.0
+margin_left = -539.5
+margin_right = 541.5
+margin_bottom = 313.0
 custom_colors/font_color = Color( 0, 0, 0, 1 )
 custom_fonts/font = SubResource( 1 )
 text = "

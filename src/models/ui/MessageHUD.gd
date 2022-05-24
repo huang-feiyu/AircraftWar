@@ -10,23 +10,15 @@ func _ready():
 
 func _on_EasyButton_pressed():
 	GameManager.difficulty = 0
-	change_bg_img()
-	emit_signal("start_game")
-	$StartTimer.start()
-
+	start_game()
 
 func _on_NormalButton_pressed():
 	GameManager.difficulty = 1
-	change_bg_img()
-	emit_signal("start_game")
-	$StartTimer.start()
-
+	start_game()
 
 func _on_HardButton_pressed():
 	GameManager.difficulty = 2
-	change_bg_img()
-	emit_signal("start_game")
-	$StartTimer.start()
+	start_game()
 
 func _on_StartTimer_timeout():
 	$StartTimer.stop()
@@ -50,15 +42,18 @@ func show_start_message():
 
 func show_end_message():
 	print("End Score: ", GameManager.score)
+	$EndTimer.start()
 	$EndMessage.show()
 
-func hide_end_message():
+func _on_EndTimer_timeout():
 	$EndMessage.hide()
 
-func change_bg_img():
+func start_game():
 	if GameManager.difficulty == 0:
 		GameManager.bg_img = bg_dir + "bg.jpg"
 	elif GameManager.difficulty == 1:
 		GameManager.bg_img = bg_dir + "bg2.jpg" if randi() % 2 == 0 else bg_dir + "bg3.jpg"
 	else:
 		GameManager.bg_img = bg_dir + "bg4.jpg" if randi() % 2 == 0 else bg_dir + "bg5.jpg"
+	emit_signal("start_game")
+	$StartTimer.start()

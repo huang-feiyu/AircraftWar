@@ -40,8 +40,7 @@ func _process(delta):
 func _on_Game_boss_generate():
 	GameManager.boss_count += 1
 	var boss = boss_scene.instance()
-	var pos = Vector2(rand_range(0.1, 0.9) * screen_size.x, rand_range(0.1, 0.2) * screen_size.y)
-	boss.start(pos)
+	boss.start(Vector2(rand_range(0.1, 0.9) * screen_size.x, rand_range(0.1, 0.2) * screen_size.y))
 	add_child(boss)
 	if GameManager.is_sound_on:
 		emit_signal("bgm_stop")
@@ -65,46 +64,51 @@ func _on_EnemyTimer_timeout():
 
 # game over
 func _on_Hero_hero_dead():
-	print("game get hero dead")
 	game_over()
 
 # start a game
 func new_game():
-	GameManager.init()
+	is_game_over = false
+	print("Game: game start")
 	$StartTimer.start()
+
+	GameManager.init()
 	if GameManager.is_sound_on:
 		$BgmSound.play()
 	else:
 		$BgmSound.stop()
 	$BgImg.texture = load(GameManager.bg_img)
 	$BgImg.rect_scale = Vector2(screen_size.x / 512, screen_size.y / 768)
-	is_game_over = false
 
 # end the game
 func game_over():
-	emit_signal("game_over")
-	print("game emit game_over")
 	is_game_over = true
-	if GameManager.is_sound_on:
-		$GameOverSound.play()
+	print("Game: game over")
 	$StartTimer.stop()
 	$EnemyTimer.stop()
 	$PlayHUD.game_over()
 	get_tree().call_group("all", "queue_free")
 	stop_music()
 
+	if GameManager.is_sound_on:
+		$GameOverSound.play()
+	emit_signal("game_over")
+
 # music
 func _on_Game_bgm_stop():
 	if $BgmSound.is_playing():
-		print("bgm playing, turn off")
+		print("nomral bgm stop")
 		$BgmSound.stop()
 	if not $BossBgmSound.is_playing() and GameManager.is_sound_on:
+		print("boss bgm start")
 		$BossBgmSound.play()
 
 func _on_Game_boss_bgm_stop():
 	if $BossBgmSound.is_playing():
+		print("boss bgm stop")
 		$BossBgmSound.stop()
 	if not $BgmSound.is_playing() and GameManager.is_sound_on and not is_game_over:
+		print("normal bgm start")
 		$BgmSound.play()
 
 # replay bgm

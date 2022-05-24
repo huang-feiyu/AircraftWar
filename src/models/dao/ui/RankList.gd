@@ -93,7 +93,6 @@ func delete_row():
 
 # start
 func start():
-	print("RankList: start")
 	$DifficultyLabel.text =("\nEasy" if GameManager.difficulty == 0 else\
 							"\nNormal" if GameManager.difficulty == 1 else\
 							"\nHard") + " Mode"
@@ -103,7 +102,6 @@ func start():
 
 # end
 func end():
-	print("RankList: end")
 	$Table.hide()
 	$DeletionConfirm.hide()
 	$DifficultyLabel.hide()

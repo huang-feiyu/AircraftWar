@@ -10,6 +10,18 @@
 
 > 大致遵循官方的 [project organization](https://docs.godotengine.org/zh_CN/stable/tutorials/best_practices/project_organization.html) 指南.
 
+### 游戏流程图
+
+```
+-> Main(S0), MessageHUD --{1}-> Game, PlayHUD(S1) --{2}-> RankList, MessageHUD(S2) --{3}-> S0
+
+{1}: 开始游戏, 根据 MessageHUD 中 button 的状态切换到不同的 state.
+{2}: 游戏结束, 自动切换到 S2.
+{3}: 切换到排行榜, 根据 MessageHUD 中 RestartButton 切换到 S0.
+```
+
+### 目录结构
+
 ```tree
 .
 ├── LICENSE
@@ -91,23 +103,24 @@ Enemy extends FlyingObject
 
 可以, 增加继承层级.
 
-1. 游戏属性管理过于分散
-
-2. 英雄类内部结构混乱
+1. 英雄类内部结构混乱
 
 删去冗余的属性.
 
+2. 修改其他冗余
 
-## 实现日志
+## 结构概述
 
-> 已实现基本功能.
-
-### 2022-05-18
-
-实现排行榜. 对于数据存储模式, 准备采用 [SQLite](https://github.com/2shady4u/godot-sqlite), 此次还不予实现.
+### Main
 
 ```
-# select by difficulty
-Rank | Name | Score | Date |
+Main
+├── Game
+├── MessageHUD
 ```
 
+├── LICENSE
+├── README.md
+├── addons/
+│   └── godot_table/
+├── assets/

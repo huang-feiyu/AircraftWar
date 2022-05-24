@@ -85,10 +85,10 @@ anchor_left = 0.5
 anchor_top = 1.0
 anchor_right = 0.5
 anchor_bottom = 1.0
-margin_left = -360.0
-margin_top = -244.0
-margin_right = -160.0
-margin_bottom = -184.0
+margin_left = -234.0
+margin_top = -184.0
+margin_right = -76.0
+margin_bottom = -144.0
 rect_scale = Vector2( 3, 3 )
 custom_fonts/font = SubResource( 4 )
 action_mode = 0
@@ -99,8 +99,11 @@ expand_icon = true
 [node name="StartTimer" type="Timer" parent="."]
 wait_time = 0.5
 
+[node name="EndTimer" type="Timer" parent="."]
+
 [connection signal="pressed" from="EasyButton" to="." method="_on_EasyButton_pressed"]
 [connection signal="pressed" from="NormalButton" to="." method="_on_NormalButton_pressed"]
 [connection signal="pressed" from="HardButton" to="." method="_on_HardButton_pressed"]
 [connection signal="toggled" from="MusicCheck" to="." method="_on_MusicCheck_toggled"]
 [connection signal="timeout" from="StartTimer" to="." method="_on_StartTimer_timeout"]
+[connection signal="timeout" from="EndTimer" to="." method="_on_EndTimer_timeout"]
