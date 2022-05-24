@@ -15,11 +15,16 @@ _global_script_classes=[ {
 "path": "res://src/characters/bullets/BaseBullet.gd"
 }, {
 "base": "FlyingObject",
+"class": "BaseProp",
+"language": "GDScript",
+"path": "res://src/characters/props/BaseProp.gd"
+}, {
+"base": "BaseProp",
 "class": "Blood",
 "language": "GDScript",
 "path": "res://src/characters/props/Blood.gd"
 }, {
-"base": "FlyingObject",
+"base": "BaseProp",
 "class": "Bomb",
 "language": "GDScript",
 "path": "res://src/characters/props/Bomb.gd"
@@ -29,7 +34,7 @@ _global_script_classes=[ {
 "language": "GDScript",
 "path": "res://src/characters/enemies/Boss.gd"
 }, {
-"base": "FlyingObject",
+"base": "BaseProp",
 "class": "Bullet",
 "language": "GDScript",
 "path": "res://src/characters/props/Bullet.gd"
@@ -66,6 +71,7 @@ _global_script_classes=[ {
 } ]
 _global_script_class_icons={
 "BaseBullet": "",
+"BaseProp": "",
 "Blood": "",
 "Bomb": "",
 "Boss": "",

@@ -1,11 +1,10 @@
-class_name Bullet extends FlyingObject
-
-var is_dead = false
+class_name Bullet extends BaseProp
 
 # Bullet: Attributes
 const increase_bullet = 2
 
 func _ready():
+	is_dead = false
 	velocity = Vector2((1 if randi() % 2 == 1 else -1) * randi() % 100, 150)
 	set_process(true)
 
@@ -14,14 +13,6 @@ func _process(delta):
 
 func _on_GetSupply_finished():
 	queue_free()
-
-# out of boundary
-func _on_VisibilityNotifier2D_screen_exited():
-	queue_free()
-
-# init
-func start(pos):
-	position = pos
 
 # end
 func end():

@@ -89,6 +89,8 @@ Enemy extends FlyingObject
 
 0. 测试 Node 是否能够继承
 
+可以, 增加继承层级.
+
 1. 游戏属性管理过于分散
 
 

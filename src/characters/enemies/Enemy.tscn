@@ -13,7 +13,3 @@ enemy_bullet_scene = ExtResource( 5 )
 blood_prop_scene = ExtResource( 3 )
 bullet_prop_scene = ExtResource( 2 )
 bomb_prop_scene = ExtResource( 4 )
-
-[node name="VisibilityNotifier2D" type="VisibilityNotifier2D" parent="."]
-position = Vector2( -95, -147.5 )
-scale = Vector2( 54.7, 114.25 )

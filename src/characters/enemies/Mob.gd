@@ -1,7 +1,7 @@
 class_name Mob extends Enemy
 
 # Mob: Attributes
-var score_value = 10
+const score_value = 10
 
 # init for every mob
 func _ready():
@@ -27,10 +27,6 @@ func _on_Mob_area_entered(area:Area2D):
 	bullet_detection(area)
 	if area.name == "Hero":
 		end()
-
-# out of the boundary
-func _on_VisibilityNotifier2D_screen_exited():
-	end()
 
 # init
 func start(pos):
