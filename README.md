@@ -93,6 +93,7 @@ Enemy extends FlyingObject
 
 1. 游戏属性管理过于分散
 
+2. 英雄类内部结构混乱
 
 
 ## 实现日志
