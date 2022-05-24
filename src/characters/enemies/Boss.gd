@@ -2,7 +2,7 @@ class_name Boss extends Enemy
 
 # Boss: Attributes
 const score_value = 100
-var boss_bullet_num = GameManager.BOSS_INIT_BULLET_NUM
+var bullet_num = GameManager.BOSS_INIT_BULLET_NUM
 
 # Called when the node enters the scene tree for the first time.
 func _ready():
@@ -22,9 +22,9 @@ func _process(delta):
 # shoot bullets
 func _on_BulletTimer_timeout():
 	var bullets = []
-	for i in range(boss_bullet_num):
+	for i in range(bullet_num):
 		var bullet = enemy_bullet_scene.instance()
-		bullet.start(Vector2(position.x + (i - boss_bullet_num / 2) * 40, position.y + 200), power)
+		bullet.start(Vector2(position.x + (i - bullet_num / 2) * 40, position.y + 200), power)
 		bullets.append(bullet)
 		get_parent().add_child(bullet)
 	# strategy

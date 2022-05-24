@@ -9,13 +9,12 @@ var score = 0
 var bomb_supply = false
 
 # Hero
-var hero_hp = HERO_MAX_HP
-var hero_bullet_num = HERO_INIT_BULLET_NUM
+var hero_hp = HERO_MAX_HP # for PlayHUD
 
 # Enemies
-var enemy_num = 0
-var boss_count = 0
-var boss_alive = 0
+var enemy_num = 0 # limit the number of enemies
+var boss_count = 0 # for init boss, compare to generate threshold
+var boss_alive = 0 # for boss BGM
 
 const HERO_MAX_HP = 100000
 const HERO_MAX_POWER = 50
@@ -45,7 +44,6 @@ func init():
 	score = 0
 	bomb_supply = false
 	hero_hp = HERO_MAX_HP
-	hero_bullet_num = HERO_INIT_BULLET_NUM
 	enemy_num = 0
 	boss_count = 0
 	boss_alive = 0

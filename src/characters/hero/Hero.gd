@@ -4,12 +4,13 @@ export(PackedScene) var hero_bullet_scene
 
 # internal member
 var dragging = false
-var is_bullet_prop = false
+var is_bullet_prop = false # only add bullet num once
 
 # Hero: Attributes
 var hp = GameManager.HERO_MAX_HP
 var power = GameManager.HERO_INIT_POWER
-var is_hero_dead = false
+var bullet_num = GameManager.HERO_INIT_BULLET_NUM
+var is_hero_dead = false # for emit death signal
 
 signal hero_dead
 
@@ -35,7 +36,6 @@ func _input(event):
 
 # shoot
 func _on_BulletTimer_timeout():
-	var bullet_num = GameManager.hero_bullet_num
 	var bullets = []
 	for i in range(bullet_num):
 		var bullet = hero_bullet_scene.instance()
@@ -60,22 +60,25 @@ func _on_Hero_area_entered(area:Area2D):
 
 # 5 seconds
 func _on_BulletPropTimer_timeout():
-	GameManager.hero_bullet_num = GameManager.HERO_INIT_BULLET_NUM
+	bullet_num = GameManager.HERO_INIT_BULLET_NUM
 	is_bullet_prop = false
 	$BulletPropTimer.stop()
 
 # init
 func start(pos):
-	print("init hero")
+	print("hero init")
 	hp = GameManager.HERO_MAX_HP
 	position = pos
 	is_hero_dead = false
 	$BulletTimer.start()
 	show()
 
+	bullet_num = GameManager.HERO_INIT_BULLET_NUM
+	is_bullet_prop = false
+
 # death
 func end():
-	print("init dead")
+	print("hero dead")
 	hp = 0
 	GameManager.hero_hp = hp
 	is_hero_dead = true
@@ -98,7 +101,7 @@ func crash_prop(prop):
 		decreases_hp(prop.call("get_increase"))
 		prop.call("end")
 	elif "Bullet" in prop.name and not "Hero" in prop.name:
-		GameManager.hero_bullet_num += 0 if is_bullet_prop else prop.call("get_increase")
+		bullet_num += 0 if is_bullet_prop else prop.call("get_increase")
 		is_bullet_prop = true
 		prop.call("end")
 		$BulletPropTimer.start() # restart bullet prop timer

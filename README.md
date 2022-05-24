@@ -95,6 +95,8 @@ Enemy extends FlyingObject
 
 2. 英雄类内部结构混乱
 
+删去冗余的属性.
+
 
 ## 实现日志
 
