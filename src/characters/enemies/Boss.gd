@@ -1,7 +1,7 @@
 class_name Boss extends Enemy
 
 # Boss: Attributes
-var score_value = 100
+const score_value = 100
 var boss_bullet_num = GameManager.BOSS_INIT_BULLET_NUM
 
 # Called when the node enters the scene tree for the first time.

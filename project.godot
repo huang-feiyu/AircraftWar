@@ -19,12 +19,12 @@ _global_script_classes=[ {
 "language": "GDScript",
 "path": "res://src/characters/props/BaseProp.gd"
 }, {
-"base": "FlyingObject",
+"base": "BaseProp",
 "class": "Blood",
 "language": "GDScript",
 "path": "res://src/characters/props/Blood.gd"
 }, {
-"base": "FlyingObject",
+"base": "BaseProp",
 "class": "Bomb",
 "language": "GDScript",
 "path": "res://src/characters/props/Bomb.gd"
@@ -34,7 +34,7 @@ _global_script_classes=[ {
 "language": "GDScript",
 "path": "res://src/characters/enemies/Boss.gd"
 }, {
-"base": "FlyingObject",
+"base": "BaseProp",
 "class": "Bullet",
 "language": "GDScript",
 "path": "res://src/characters/props/Bullet.gd"

@@ -1,7 +1,7 @@
 class_name Elite extends Enemy
 
 # Elite: Attributes
-var score_value = 20
+const score_value = 20
 
 # Called when the node enters the scene tree for the first time.
 func _ready():
@@ -30,10 +30,6 @@ func _on_Elite_area_entered(area:Area2D):
 	bullet_detection(area)
 	if area.name == "Hero":
 		end()
-
-# out of the boundary
-func _on_VisibilityNotifier2D_screen_exited():
-	end()
 
 # init
 func start(pos):
