@@ -1,8 +1,9 @@
-[gd_scene load_steps=5 format=2]
+[gd_scene load_steps=6 format=2]
 
 [ext_resource path="res://assets/fonts/Xolonium-Regular.ttf" type="DynamicFontData" id=1]
 [ext_resource path="res://addons/godot_table/Table.gd" type="Script" id=2]
 [ext_resource path="res://src/models/dao/ui/RankList.gd" type="Script" id=3]
+[ext_resource path="res://src/models/dao/sqlite/sqlite.tscn" type="PackedScene" id=4]
 
 [sub_resource type="DynamicFont" id=1]
 size = 128
@@ -43,8 +44,6 @@ column_headers = [ "Rank", "Name", "Score", "Date", "ID" ]
 min_row_count = 1
 rows = [ [ "1", "21", "234", "423", "--" ], [ "243", "243", "243", "243", "--" ], [ "243", "234", "234", "243", "--" ] ]
 
-[node name="Timer" type="Timer" parent="."]
-
 [node name="DeletionConfirm" type="ConfirmationDialog" parent="."]
 visible = true
 anchor_left = 0.5
@@ -57,7 +56,9 @@ margin_right = -200.5
 margin_bottom = -68.0
 rect_scale = Vector2( 4, 4 )
 window_title = "Ensure to delete?"
+dialog_autowrap = true
+
+[node name="Sqlite" parent="." instance=ExtResource( 4 )]
 
 [connection signal="CLICK_ROW" from="Table" to="." method="_on_Table_CLICK_ROW"]
-[connection signal="timeout" from="Timer" to="." method="_on_Timer_timeout"]
 [connection signal="confirmed" from="DeletionConfirm" to="." method="_on_DeletionConfirm_confirmed"]
