@@ -12,3 +12,6 @@ data_*/
 
 # Android
 android/
+
+# test data
+data/*.db
