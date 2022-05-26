@@ -101,7 +101,7 @@ window/handheld/orientation="portrait"
 
 [editor_plugins]
 
-enabled=PoolStringArray( "res://addons/godot_table/plugin.cfg" )
+enabled=PoolStringArray( "res://addons/godot-sqlite/plugin.cfg", "res://addons/godot_table/plugin.cfg" )
 
 [global]
 
