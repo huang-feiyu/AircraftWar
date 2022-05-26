@@ -8,7 +8,8 @@ var bullet_num = GameManager.BOSS_INIT_BULLET_NUM
 func _ready():
 	hp = GameManager.BOSS_MAX_HP
 	power = GameManager.BOSS_INIT_POWER
-	velocity = Vector2(50, 0)
+	velocity = GameManager.boss_init_velocity
+	$BulletTimer.set_wait_time(GameManager.GAME_ENEMY_SHOOT_TIME)
 	$BulletTimer.start()
 
 # move every frame

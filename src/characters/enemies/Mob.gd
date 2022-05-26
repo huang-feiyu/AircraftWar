@@ -7,7 +7,8 @@ const score_value = 10
 func _ready():
 	hp = GameManager.MOB_MAX_HP
 	power = GameManager.MOB_INIT_POWER
-	velocity = Vector2(0, 125)
+	velocity = GameManager.mob_init_velocity
+	$BulletTimer.set_wait_time(GameManager.GAME_ENEMY_SHOOT_TIME)
 	$BulletTimer.start()
 
 # move every frame

@@ -75,6 +75,7 @@ func start(pos):
 
 	bullet_num = GameManager.HERO_INIT_BULLET_NUM
 	is_bullet_prop = false
+	$BulletTimer.set_wait_time(GameManager.GAME_HERO_SHOOT_TIME)
 
 # death
 func end():

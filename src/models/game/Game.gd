@@ -62,6 +62,10 @@ func _on_EnemyTimer_timeout():
 	enemy.start(pos)
 	add_child(enemy)
 
+# update
+func _on_DifficultyTimer_timeout():
+	GameManager.update()
+
 # game over
 func _on_Hero_hero_dead():
 	game_over()
@@ -71,6 +75,7 @@ func new_game():
 	is_game_over = false
 	print("Game: game start")
 	$StartTimer.start()
+	$DifficultyTimer.start()
 
 	GameManager.init()
 	if GameManager.is_sound_on:
@@ -79,12 +84,14 @@ func new_game():
 		$BgmSound.stop()
 	$BgImg.texture = load(GameManager.bg_img)
 	$BgImg.rect_scale = Vector2(screen_size.x / 512, screen_size.y / 768)
+	$EnemyTimer.set_wait_time(GameManager.GAME_ENEMY_TIME)
 
 # end the game
 func game_over():
 	is_game_over = true
 	print("Game: game over")
 	$StartTimer.stop()
+	$DifficultyTimer.start()
 	$EnemyTimer.stop()
 	$PlayHUD.game_over()
 	get_tree().call_group("all", "queue_free")

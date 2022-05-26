@@ -1,0 +1,27 @@
+[gd_scene load_steps=4 format=2]
+
+[ext_resource path="res://src/tools/GameManager.gd" type="Script" id=1]
+[ext_resource path="res://src/tools/DifficultyManager.gd" type="Script" id=2]
+
+[sub_resource type="PackedScene" id=1]
+_bundled = {
+"conn_count": 0,
+"conns": PoolIntArray(  ),
+"editable_instances": [  ],
+"names": PoolStringArray( "DifficultyManager", "script", "Node2D" ),
+"node_count": 1,
+"node_paths": [  ],
+"nodes": PoolIntArray( -1, -1, 2, 0, -1, 1, 1, 0, 0 ),
+"variants": [ ExtResource( 2 ) ],
+"version": 2
+}
+
+[node name="GameManager" type="Node2D"]
+script = ExtResource( 1 )
+difficulty_scene = SubResource( 1 )
+
+[node name="Timer" type="Timer" parent="."]
+wait_time = 3.0
+autostart = true
+
+[connection signal="timeout" from="Timer" to="." method="_on_Timer_timeout"]

@@ -7,7 +7,8 @@ const score_value = 20
 func _ready():
 	hp = GameManager.ELITE_MAX_HP
 	power = GameManager.ELITE_INIT_POWER
-	velocity = Vector2((1 if randi() % 2 == 1 else -1) * randi() % 100, 150)
+	velocity = GameManager.elite_init_velocity
+	$BulletTimer.set_wait_time(GameManager.GAME_ENEMY_SHOOT_TIME)
 	$BulletTimer.start()
 
 # move every frame

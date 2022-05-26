@@ -29,6 +29,9 @@ wait_time = 0.5
 
 [node name="StartTimer" type="Timer" parent="."]
 
+[node name="DifficultyTimer" type="Timer" parent="."]
+wait_time = 30.0
+
 [node name="StartPosition" type="Position2D" parent="."]
 position = Vector2( 540, 1824 )
 
@@ -49,5 +52,6 @@ stream = ExtResource( 9 )
 [connection signal="hero_dead" from="Hero" to="." method="_on_Hero_hero_dead"]
 [connection signal="timeout" from="EnemyTimer" to="." method="_on_EnemyTimer_timeout"]
 [connection signal="timeout" from="StartTimer" to="." method="_on_StartTimer_timeout"]
+[connection signal="timeout" from="DifficultyTimer" to="." method="_on_DifficultyTimer_timeout"]
 [connection signal="finished" from="BgmSound" to="." method="_on_BgmSound_finished"]
 [connection signal="finished" from="BossBgmSound" to="." method="_on_BossBgmSound_finished"]
