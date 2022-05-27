@@ -5,8 +5,6 @@ var seleted_row
 # id is unique int (record id)
 var table_array
 
-signal restart
-
 func _ready():
 	$Table.hide()
 	$DifficultyLabel.hide()

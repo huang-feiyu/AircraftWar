@@ -81,7 +81,7 @@ func start():
 		bullet_init_velocity = Vector2(0, 400)
 	elif difficulty == 2:
 		GAME_ENEMY_TIME = 0.5
-		GAME_ENEMY_SHOOT_TIME = 0.2
+		GAME_ENEMY_SHOOT_TIME = 0.4
 		GAME_HERO_SHOOT_TIME = 0.2
 		BOSS_GENERATE_SCORE = 500
 		BOSS_INIT_BULLET_NUM = 9

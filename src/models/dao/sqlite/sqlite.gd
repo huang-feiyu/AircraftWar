@@ -2,23 +2,29 @@ extends Node
 
 const SQLite = preload("res://addons/godot-sqlite/bin/gdsqlite.gdns")
 
+const create_table_user_info = "CREATE TABLE IF NOT EXISTS 'user_info' ('id'	INTEGER NOT NULL UNIQUE,'name'	TEXT NOT NULL UNIQUE,'password'	TEXT,PRIMARY KEY('id' AUTOINCREMENT))"
+const create_table_score_record = "CREATE TABLE IF NOT EXISTS 'score_record' ('id'	INTEGER NOT NULL UNIQUE,'score'	INTEGER NOT NULL,'date'	INTEGER,'difficulty'	INTEGER NOT NULL,'user_id'	INTEGER NOT NULL,'valid_bit'	INTEGER NOT NULL DEFAULT 0,PRIMARY KEY('id' AUTOINCREMENT))"
+
 var db
 var db_name := "res://data/test.db"
 
 func _ready():
 	if OS.get_name() in ["Android", "iOS", "HTML5"]:
-		copy_data_to_user()
 		db_name = "user://data/test.db"
+		copy_data_to_user()
 	db = SQLite.new()
 	db.path = db_name
 
 func copy_data_to_user():
+	print("OS: ", OS.get_name())
 	var data_path := "res://data"
 	var copy_path := "user://data"
 
 	var dir = Directory.new()
 	dir.make_dir(copy_path)
+	print("Ready to open dir: ", data_path)
 	if dir.open(data_path) == OK:
+		print("Open dir successfully")
 		dir.list_dir_begin();
 		var file_name = dir.get_next()
 		while (file_name != ""):
@@ -29,7 +35,13 @@ func copy_data_to_user():
 				dir.copy(data_path + "/" + file_name, copy_path + "/" + file_name)
 			file_name = dir.get_next()
 	else:
-		print("An error occurred when trying to access the path.")
+		print("An error occurred when trying to access the path.\n")
+		print("create empty database")
+		db = SQLite.new()
+		db.path = db_name
+		db.open_db()
+		db.query(create_table_user_info)
+		db.query(create_table_score_record)
 
 func read_record_from_db():
 	var difficulty = GameManager.difficulty
@@ -77,7 +89,7 @@ func read_account_from_db(name, psw):
 
 func timestamp_to_string(timestamp):
 	var time : Dictionary = OS.get_datetime_from_unix_time(timestamp)
-	var display_string : String = "%d/%02d/%02d %02d:%02d" % [time.year, time.month, time.day, time.hour, time.minute]
+	var display_string : String = "%02d/%02d %02d:%02d" % [time.month, time.day, time.hour, time.minute]
 	return display_string
 
 func user_name2user_id(name):

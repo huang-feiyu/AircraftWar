@@ -64,7 +64,8 @@ func _on_EnemyTimer_timeout():
 
 # update
 func _on_DifficultyTimer_timeout():
-	GameManager.update()
+	if not is_game_over:
+		GameManager.update()
 
 # game over
 func _on_Hero_hero_dead():
