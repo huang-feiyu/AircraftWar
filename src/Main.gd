@@ -1,5 +1,8 @@
 extends Node
 
+func _on_LoginHUD_login_done():
+	$MessageHUD.show_start_message()
+
 func _on_MessageHUD_start_game():
 	print("Difficulty: ", GameManager.difficulty)
 	print("Music: ", GameManager.is_sound_on)

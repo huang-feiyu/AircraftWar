@@ -1,6 +1,7 @@
 extends Node
 
 # init by users
+var user_name
 var difficulty = 0 # 0 => easy; 1 => medium; 2 => hard
 var is_sound_on = false
 var bg_img = "res://assets/img/bg/bg.jpg"
@@ -28,7 +29,7 @@ var elite_init_velocity = Vector2(75, 150)
 var boss_init_velocity = Vector2(50, 0)
 var bullet_init_velocity = Vector2(0, 300)
 
-const HERO_MAX_HP = 1000
+const HERO_MAX_HP = 10000
 const HERO_INIT_POWER = 30
 const HERO_INIT_BULLET_NUM = 3
 

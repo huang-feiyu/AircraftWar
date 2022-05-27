@@ -45,8 +45,7 @@ func delete_row():
 
 # start
 func start():
-	# TODO: add a popup to input name
-	$Sqlite.write_record_to_db("Huang")
+	$Sqlite.write_record_to_db(GameManager.user_name)
 	$DifficultyLabel.text =("\nEasy" if GameManager.difficulty == 0 else\
 							"\nNormal" if GameManager.difficulty == 1 else\
 							"\nHard") + " Mode"

@@ -13,8 +13,9 @@
 ### 游戏流程图
 
 ```
--> Main(S0), MessageHUD --{1}-> Game, PlayHUD(S1) --{2}-> RankList, MessageHUD(S2) --{3}-> S0
+-> Main(S0), LoginHUD --{4}-> Main, MessageHUD --{1}-> Game, PlayHUD(S1) --{2}-> RankList, MessageHUD(S2) --{3}-> S0
 
+{4}: 登录校验/注册
 {1}: 开始游戏, 根据 MessageHUD 中 Button 的状态切换到不同的 state.
 {2}: 游戏结束, 自动切换到 S2.
 {3}: 切换到排行榜, 根据 MessageHUD 中 RestartButton 切换到 S0.
@@ -28,11 +29,14 @@
 ├── README.md
 ├── addons/ 第三方库
 ├── assets/ 素材资源
+├── data/ 测试数据
 ├── src/ 游戏代码
+├── src
 │   ├── Main.gd
 │   ├── Main.tscn
 │   ├── characters/
 │   │   ├── FlyingObject.gd
+│   │   ├── FlyingObject.tscn
 │   │   ├── bullets/
 │   │   ├── enemies/
 │   │   ├── hero/
@@ -40,10 +44,11 @@
 │   ├── models/
 │   │   ├── dao/
 │   │   ├── game/
+│   │   ├── login/
 │   │   └── ui/
 │   └── tools/
-│       ├── DifficultyManager.gd
-│       └── GameManager.gd
+│       ├── GameManager.gd
+│       └── GameManager.tscn
 └── project.godot
  ```
 
@@ -114,6 +119,7 @@ Enemy extends FlyingObject
 ```
 Main
 * Game
+* LoginHUD
 * MessageHUD
 * RankList
 * GameOverTimer: 过一秒后切换到 RankList
