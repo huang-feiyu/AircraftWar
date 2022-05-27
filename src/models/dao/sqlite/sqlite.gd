@@ -60,6 +60,21 @@ func delete_record_from_db(id):
 	db.open_db()
 	print("update row: ", db.update_rows("score_record", "id = " + str(id), {"valid_bit": 1}))
 
+func write_account_to_db(name, psw):
+	db.open_db()
+	var dict : Dictionary = Dictionary()
+	dict["name"] = name
+	dict["password"] = psw
+	db.insert_row("user_info", dict)
+
+func read_account_from_db(name, psw):
+	db.open_db()
+	db.query("SELECT * FROM user_info WHERE name = '" + name + "';")
+	if db.query_result.size() == 0:
+		write_account_to_db(name, psw)
+		db.query("SELECT * FROM user_info WHERE name = '" + name + "';")
+	return db.query_result[0]["password"] == psw
+
 func timestamp_to_string(timestamp):
 	var time : Dictionary = OS.get_datetime_from_unix_time(timestamp)
 	var display_string : String = "%d/%02d/%02d %02d:%02d" % [time.year, time.month, time.day, time.hour, time.minute]

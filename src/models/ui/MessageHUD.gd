@@ -7,7 +7,13 @@ signal restart_game()
 signal music_changed
 
 func _ready():
-	show_start_message()
+	$StartMessage.hide()
+	$EasyButton.hide()
+	$NormalButton.hide()
+	$HardButton.hide()
+	$MusicCheck.hide()
+	$EndMessage.hide()
+	$NextGameButton.hide()
 
 func _on_EasyButton_pressed():
 	GameManager.difficulty = 0
