@@ -110,6 +110,12 @@ Enemy extends FlyingObject
 
 2. 修改其他冗余
 
+### 2022-05-31
+
+1. 修改单机登陆界面 UI
+
+2. 适配 Window Dialog 字体
+
 ## 结构概述
 
 ### Main
