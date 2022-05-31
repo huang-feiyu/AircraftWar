@@ -21,8 +21,7 @@ func _ready():
 # Called every frame. 'delta' is the elapsed time since the previous frame.
 func _process(delta):
 	# death dectection
-	$PlayHUD.call("update_hp")
-	$PlayHUD.call("update_score")
+	$PlayHUD.call("update")
 
 	# boss
 	if GameManager.score > GameManager.BOSS_GENERATE_SCORE * (GameManager.boss_count + 1):
@@ -56,7 +55,8 @@ func _on_StartTimer_timeout():
 func _on_EnemyTimer_timeout():
 	if GameManager.enemy_num > GameManager.MAX_ENEMY_NUM:
 		return
-	var enemy = elite_scene.instance() if rand_range(0, 1) > GameManager.ELITE_POSSIBILITY else\
+	var enemy = elite_scene.instance()\
+				if rand_range(0, 1) > GameManager.ELITE_POSSIBILITY else\
 				mob_scene.instance()
 	var pos = Vector2(rand_range(0.1, 0.9) * screen_size.x, rand_range(0.1, 0.2) * screen_size.y)
 	enemy.start(pos)

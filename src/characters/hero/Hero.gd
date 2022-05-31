@@ -105,7 +105,9 @@ func crash_prop(prop):
 		bullet_num += 0 if is_bullet_prop else prop.call("get_increase")
 		is_bullet_prop = true
 		prop.call("end")
+		print("Before Bullet: ", $BulletPropTimer.time_left)
 		$BulletPropTimer.start() # restart bullet prop timer
+		print("After Bullet: ", $BulletPropTimer.time_left)
 	elif "Bomb" in prop.name:
 		GameManager.bomb_supply = true
 		prop.call("end")
