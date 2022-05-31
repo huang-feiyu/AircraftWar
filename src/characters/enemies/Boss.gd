@@ -9,6 +9,8 @@ func _ready():
 	hp = GameManager.BOSS_MAX_HP
 	power = GameManager.BOSS_INIT_POWER
 	velocity = GameManager.boss_init_velocity
+	var rand = randi() % 2
+	velocity.x *= 1 if rand == 0 else -1
 	$BulletTimer.set_wait_time(GameManager.GAME_ENEMY_SHOOT_TIME)
 	$BulletTimer.start()
 

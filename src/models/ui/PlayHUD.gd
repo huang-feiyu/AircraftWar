@@ -15,8 +15,7 @@ func game_over():
 	$ScoreLabel.hide()
 	$HPBar.hide()
 
-func update_score():
+func update():
 	$ScoreLabel.text = str(GameManager.score)
-
-func update_hp():
 	$HPBar.value = float(GameManager.hero_hp) / float(GameManager.HERO_MAX_HP) * 100
+
