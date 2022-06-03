@@ -68,6 +68,76 @@ _global_script_classes=[ {
 "class": "Mob",
 "language": "GDScript",
 "path": "res://src/characters/enemies/Mob.gd"
+}, {
+"base": "Reference",
+"class": "NakamaAPI",
+"language": "GDScript",
+"path": "res://addons/com.heroiclabs.nakama/api/NakamaAPI.gd"
+}, {
+"base": "Reference",
+"class": "NakamaAsyncResult",
+"language": "GDScript",
+"path": "res://addons/com.heroiclabs.nakama/utils/NakamaAsyncResult.gd"
+}, {
+"base": "Reference",
+"class": "NakamaClient",
+"language": "GDScript",
+"path": "res://addons/com.heroiclabs.nakama/client/NakamaClient.gd"
+}, {
+"base": "Reference",
+"class": "NakamaException",
+"language": "GDScript",
+"path": "res://addons/com.heroiclabs.nakama/utils/NakamaException.gd"
+}, {
+"base": "Node",
+"class": "NakamaHTTPAdapter",
+"language": "GDScript",
+"path": "res://addons/com.heroiclabs.nakama/client/NakamaHTTPAdapter.gd"
+}, {
+"base": "Reference",
+"class": "NakamaLogger",
+"language": "GDScript",
+"path": "res://addons/com.heroiclabs.nakama/utils/NakamaLogger.gd"
+}, {
+"base": "NakamaAsyncResult",
+"class": "NakamaRTAPI",
+"language": "GDScript",
+"path": "res://addons/com.heroiclabs.nakama/api/NakamaRTAPI.gd"
+}, {
+"base": "Reference",
+"class": "NakamaRTMessage",
+"language": "GDScript",
+"path": "res://addons/com.heroiclabs.nakama/api/NakamaRTMessage.gd"
+}, {
+"base": "Reference",
+"class": "NakamaSerializer",
+"language": "GDScript",
+"path": "res://addons/com.heroiclabs.nakama/utils/NakamaSerializer.gd"
+}, {
+"base": "NakamaAsyncResult",
+"class": "NakamaSession",
+"language": "GDScript",
+"path": "res://addons/com.heroiclabs.nakama/api/NakamaSession.gd"
+}, {
+"base": "Reference",
+"class": "NakamaSocket",
+"language": "GDScript",
+"path": "res://addons/com.heroiclabs.nakama/socket/NakamaSocket.gd"
+}, {
+"base": "Node",
+"class": "NakamaSocketAdapter",
+"language": "GDScript",
+"path": "res://addons/com.heroiclabs.nakama/socket/NakamaSocketAdapter.gd"
+}, {
+"base": "Reference",
+"class": "NakamaStorageObjectId",
+"language": "GDScript",
+"path": "res://addons/com.heroiclabs.nakama/api/NakamaStorageObjectId.gd"
+}, {
+"base": "Reference",
+"class": "NakamaWriteStorageObject",
+"language": "GDScript",
+"path": "res://addons/com.heroiclabs.nakama/api/NakamaWriteStorageObject.gd"
 } ]
 _global_script_class_icons={
 "BaseBullet": "",
@@ -81,17 +151,42 @@ _global_script_class_icons={
 "EnemyBullet": "",
 "FlyingObject": "",
 "HeroBullet": "",
-"Mob": ""
+"Mob": "",
+"NakamaAPI": "",
+"NakamaAsyncResult": "",
+"NakamaClient": "",
+"NakamaException": "",
+"NakamaHTTPAdapter": "",
+"NakamaLogger": "",
+"NakamaRTAPI": "",
+"NakamaRTMessage": "",
+"NakamaSerializer": "",
+"NakamaSession": "",
+"NakamaSocket": "",
+"NakamaSocketAdapter": "",
+"NakamaStorageObjectId": "",
+"NakamaWriteStorageObject": ""
 }
 
 [application]
 
 config/name="AircraftWar"
-run/main_scene="res://src/Main.tscn"
+run/main_scene="res://src/online/WebMain.tscn"
 
 [autoload]
 
 GameManager="*res://src/tools/GameManager.gd"
+Online="*res://src/online/autoload/Online.gd"
+OnlineMatch="*res://src/online/autoload/OnlineMatch.gd"
+Nakama="*res://addons/com.heroiclabs.nakama/Nakama.gd"
+
+[debug]
+
+multirun/number_of_windows=2
+multirun/window_distance=1270
+multirun/add_custom_args=true
+multirun/first_window_args="listen"
+multirun/other_window_args="join"
 
 [display]
 
@@ -101,7 +196,7 @@ window/handheld/orientation="portrait"
 
 [editor_plugins]
 
-enabled=PoolStringArray( "res://addons/godot-sqlite/plugin.cfg", "res://addons/godot_table/plugin.cfg" )
+enabled=PoolStringArray( "res://addons/godot-sqlite/plugin.cfg", "res://addons/godot_table/plugin.cfg", "res://addons/multirun/plugin.cfg" )
 
 [global]
 

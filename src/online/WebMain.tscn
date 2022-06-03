@@ -1,0 +1,38 @@
+[gd_scene load_steps=9 format=2]
+
+[ext_resource path="res://src/online/ui/WebLoginHUD.tscn" type="PackedScene" id=1]
+[ext_resource path="res://src/online/ui/FindMatch.tscn" type="PackedScene" id=2]
+[ext_resource path="res://src/online/WebMain.gd" type="Script" id=3]
+[ext_resource path="res://src/online/ui/ReadyScreen.tscn" type="PackedScene" id=4]
+[ext_resource path="res://assets/fonts/Xolonium-Regular.ttf" type="DynamicFontData" id=5]
+[ext_resource path="res://src/online/ui/UserReady.gd" type="Script" id=6]
+
+[sub_resource type="DynamicFont" id=1]
+size = 28
+font_data = ExtResource( 5 )
+
+[sub_resource type="PackedScene" id=2]
+resource_local_to_scene = true
+_bundled = {
+"conn_count": 0,
+"conns": PoolIntArray(  ),
+"editable_instances": [  ],
+"names": PoolStringArray( "UserReady", "margin_right", "margin_bottom", "rect_min_size", "script", "Control", "UserName", "margin_left", "margin_top", "custom_fonts/normal_font", "text", "RichTextLabel", "Ready" ),
+"node_count": 3,
+"node_paths": [  ],
+"nodes": PoolIntArray( -1, -1, 5, 0, -1, 4, 1, 0, 2, 1, 3, 2, 4, 3, 0, 0, 0, 11, 6, -1, 6, 7, 4, 8, 5, 1, 6, 2, 7, 9, 8, 10, 9, 0, 0, 0, 11, 12, -1, 6, 7, 10, 8, 5, 1, 11, 2, 7, 9, 8, 10, 12, 0 ),
+"variants": [ 697.0, 88.0, Vector2( 0, 50 ), ExtResource( 6 ), 18.0, 1.0, 282.0, 41.0, SubResource( 1 ), "Test Username", 377.0, 647.0, "Not Ready" ],
+"version": 2
+}
+
+[node name="WebMain" type="Node2D"]
+script = ExtResource( 3 )
+
+[node name="ReadyScreen" parent="." instance=ExtResource( 4 )]
+player_ready_scene = SubResource( 2 )
+
+[node name="FindMatch" parent="." instance=ExtResource( 2 )]
+
+[node name="WebLoginHUD" parent="." instance=ExtResource( 1 )]
+
+[connection signal="player_ready_signal" from="ReadyScreen" to="." method="_on_ReadyScreen_player_ready_signal"]
