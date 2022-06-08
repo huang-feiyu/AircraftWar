@@ -1,15 +1,17 @@
-extends Control
+extends CanvasLayer
 
 func _ready():
+	end()
 	OnlineMatch.connect("matchmaker_matched", self, "OnMatchFound")
 
 
 func OnMatchFound(players):
 	print("Players Found: ", players)
-	self.hide()
+	end()
 
 func _on_Button_button_down():
 	$Button.hide()
+	$Label.show()
 
 	if not Online.is_nakama_socket_connected():
 		Online.connect_nakama_socket()
@@ -21,3 +23,11 @@ func _on_Button_button_down():
 	}
 	OnlineMatch.start_matchmaking(Online.nakama_socket, data)
 
+func start():
+	$Panel.show()
+	$Button.show()
+
+func end():
+	$Panel.hide()
+	$Label.hide()
+	$Button.hide()

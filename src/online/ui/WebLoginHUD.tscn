@@ -1,4 +1,4 @@
-[gd_scene load_steps=7 format=2]
+[gd_scene load_steps=9 format=2]
 
 [ext_resource path="res://src/online/ui/WebLoginHUD.gd" type="Script" id=1]
 [ext_resource path="res://assets/fonts/Xolonium-Regular.ttf" type="DynamicFontData" id=2]
@@ -19,7 +19,13 @@ font_data = ExtResource( 2 )
 size = 48
 font_data = ExtResource( 2 )
 
-[node name="WebLoginHUD" type="Control"]
+[sub_resource type="DynamicFont" id=5]
+font_data = ExtResource( 2 )
+
+[sub_resource type="Theme" id=6]
+default_font = SubResource( 5 )
+
+[node name="WebLoginHUD" type="CanvasLayer"]
 script = ExtResource( 1 )
 
 [node name="Panel" type="Panel" parent="."]
@@ -31,9 +37,9 @@ margin_bottom = 883.0
 [node name="InputContainer" type="GridContainer" parent="."]
 anchor_left = 0.5
 anchor_right = 0.5
-margin_left = 172.0
+margin_left = -374.0
 margin_top = 347.0
-margin_right = 884.0
+margin_right = 364.0
 margin_bottom = 456650.0
 __meta__ = {
 "_edit_group_": true
@@ -182,5 +188,22 @@ margin_bottom = 64.0
 custom_fonts/font = SubResource( 4 )
 text = "Login"
 
+[node name="PasswordConfirm" type="ConfirmationDialog" parent="."]
+visible = true
+light_mask = 513
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+margin_left = -271.0
+margin_top = 36.0
+margin_right = -25.0
+margin_bottom = 106.0
+rect_scale = Vector2( 2, 2 )
+theme = SubResource( 6 )
+window_title = "Ensure your password?"
+dialog_autowrap = true
+
 [connection signal="button_down" from="InputContainer/GridContainer/RegisterButton" to="." method="_on_RegisterButton_button_down"]
 [connection signal="button_down" from="InputContainer/GridContainer/LoginButton" to="." method="_on_LoginButton_button_down"]
+[connection signal="confirmed" from="PasswordConfirm" to="." method="_on_PasswordConfirm_confirmed"]

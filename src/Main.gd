@@ -1,6 +1,12 @@
 extends Node
 
+func _ready():
+	$WebMain.hide()
+
 func _on_LoginHUD_login_done():
+	$MessageHUD.show_start_message()
+
+func _on_WebMain_login_done():
 	$MessageHUD.show_start_message()
 
 func _on_MessageHUD_start_game():
@@ -23,3 +29,9 @@ func _on_MessageHUD_music_changed():
 func _on_MessageHUD_restart_game():
 	$MessageHUD.show_start_message()
 	$RankList.end()
+
+func _on_ChooseModeHUD_double():
+	$LoginHUD.start()
+
+func _on_ChooseModeHUD_single():
+	$WebMain.start()

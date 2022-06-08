@@ -8,9 +8,7 @@
 size = 54
 font_data = ExtResource( 2 )
 
-[node name="ReadyScreen" type="Control"]
-margin_right = 40.0
-margin_bottom = 40.0
+[node name="ReadyScreen" type="CanvasLayer"]
 script = ExtResource( 3 )
 player_ready_scene = ExtResource( 1 )
 

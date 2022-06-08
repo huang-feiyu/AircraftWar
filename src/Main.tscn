@@ -1,15 +1,19 @@
-[gd_scene load_steps=6 format=2]
+[gd_scene load_steps=8 format=2]
 
 [ext_resource path="res://src/Main.gd" type="Script" id=1]
 [ext_resource path="res://src/models/game/Game.tscn" type="PackedScene" id=2]
 [ext_resource path="res://src/models/ui/MessageHUD.tscn" type="PackedScene" id=3]
 [ext_resource path="res://src/models/dao/ui/RankList.tscn" type="PackedScene" id=4]
 [ext_resource path="res://src/models/login/LoginHUD.tscn" type="PackedScene" id=5]
+[ext_resource path="res://src/models/ui/ChooseModeHUD.tscn" type="PackedScene" id=6]
+[ext_resource path="res://src/online/WebMain.tscn" type="PackedScene" id=7]
 
 [node name="Main" type="Node"]
 script = ExtResource( 1 )
 
 [node name="Game" parent="." instance=ExtResource( 2 )]
+
+[node name="ChooseModeHUD" parent="." instance=ExtResource( 6 )]
 
 [node name="MessageHUD" parent="." instance=ExtResource( 3 )]
 
@@ -17,11 +21,16 @@ script = ExtResource( 1 )
 
 [node name="GameOverTimer" type="Timer" parent="."]
 
+[node name="WebMain" parent="." instance=ExtResource( 7 )]
+
 [node name="LoginHUD" parent="." instance=ExtResource( 5 )]
 
 [connection signal="game_over" from="Game" to="." method="_on_Game_game_over"]
+[connection signal="double" from="ChooseModeHUD" to="." method="_on_ChooseModeHUD_double"]
+[connection signal="single" from="ChooseModeHUD" to="." method="_on_ChooseModeHUD_single"]
 [connection signal="music_changed" from="MessageHUD" to="." method="_on_MessageHUD_music_changed"]
 [connection signal="restart_game" from="MessageHUD" to="." method="_on_MessageHUD_restart_game"]
 [connection signal="start_game" from="MessageHUD" to="." method="_on_MessageHUD_start_game"]
 [connection signal="timeout" from="GameOverTimer" to="." method="_on_GameOverTimer_timeout"]
+[connection signal="login_done" from="WebMain" to="." method="_on_WebMain_login_done"]
 [connection signal="login_done" from="LoginHUD" to="." method="_on_LoginHUD_login_done"]
