@@ -13,6 +13,7 @@ func _ready():
 	$HardButton.hide()
 	$MusicCheck.hide()
 	$EndMessage.hide()
+	$VSMessage.hide()
 	$NextGameButton.hide()
 
 func _on_EasyButton_pressed():
@@ -50,13 +51,17 @@ func show_start_message():
 
 func show_end_message():
 	print("End Score: ", GameManager.score)
-	$EndTimer.start()
+	if not GameManager.single:
+		update_score()
+	else:
+		$EndTimer.start(1)
 	$EndMessage.show()
 
 func _on_EndTimer_timeout():
 	$EndTimer.stop()
 	$EndMessage.hide()
 	$NextGameButton.show()
+	$VSMessage.hide()
 
 func _on_NextGameButton_button_down():
 	print("\nRestart")
@@ -73,4 +78,11 @@ func start_game():
 	emit_signal("start_game")
 	$StartTimer.start()
 
-
+func update_score():
+	if GameManager.score > GameManager.opponent_score:
+		$EndMessage.text = "You win!"
+	else:
+		$EndMessage.text = "You lose!"
+	$VSMessage.hide()
+	$VSMessage.text = str(GameManager.score) + " vs " + str(GameManager.opponent_score)
+	$VSMessage.show()
