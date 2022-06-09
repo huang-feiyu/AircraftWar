@@ -32,5 +32,4 @@ script = ExtResource( 1 )
 [connection signal="restart_game" from="MessageHUD" to="." method="_on_MessageHUD_restart_game"]
 [connection signal="start_game" from="MessageHUD" to="." method="_on_MessageHUD_start_game"]
 [connection signal="timeout" from="GameOverTimer" to="." method="_on_GameOverTimer_timeout"]
-[connection signal="login_done" from="WebMain" to="." method="_on_WebMain_login_done"]
 [connection signal="login_done" from="LoginHUD" to="." method="_on_LoginHUD_login_done"]

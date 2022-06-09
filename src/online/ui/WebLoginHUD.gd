@@ -1,5 +1,7 @@
 extends CanvasLayer
 
+signal weblogin_done()
+
 # Called when the node enters the scene tree for the first time.
 func _ready():
 	end()
@@ -16,6 +18,8 @@ func _on_RegisterButton_button_down():
 		return
 	set_dialog_text("Password: " + $InputContainer/PasswordContainer/PasswordInput.text)
 	Online.nakama_session = session
+	emit_signal("weblogin_done")
+	print("emit weblogin_done")
 	end()
 
 func _on_LoginButton_button_down():
@@ -28,6 +32,8 @@ func _on_LoginButton_button_down():
 		print("Login: ", session.get_exception().message)
 		return
 	Online.nakama_session = session
+	emit_signal("weblogin_done")
+	print("emit weblogin_done")
 	end()
 
 func _on_PasswordConfirm_confirmed():

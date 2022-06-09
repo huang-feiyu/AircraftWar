@@ -2,7 +2,10 @@ extends Node2D
 
 signal login_done()
 
-var ready_players = []
+var ready_players = {}
+
+func _ready():
+	login_end()
 
 func _get_custom_rpc_methods():
 	return [
@@ -15,20 +18,39 @@ func _on_ReadyScreen_player_ready_signal():
 func player_is_ready(id):
 	$ReadyScreen.set_ready_status(id, "Ready")
 
-	if OnlineMatch.is_network_server():
-		ready_players.append(id)
-		if ready_players.size() == OnlineMatch.players.size():
-			OnlineMatch.start_playing()
-			emit_signal("login_done")
-			print("All Players are ready, lets start the game")
-			end()
+	# if OnlineMatch.is_network_server():
+	ready_players[id] = true
+	if ready_players.size() == OnlineMatch.players.size():
+		OnlineMatch.start_playing()
+		emit_signal("login_done")
+		start_game()
+
+func _on_WebLoginHUD_weblogin_done():
+	print("weblogin_done recevie")
+	$MessageHUD.show_start_message()
+
+func _on_MessageHUD_start_game():
+	if not GameManager.single:
+		$FindMatch.start()
+		$ReadyScreen.start()
+
+func _on_Game_game_over():
+	if not GameManager.single:
+		$MessageHUD.show_end_message()
+
+func _on_MessageHUD_restart_game():
+	if not GameManager.single:
+		$MessageHUD.show_start_message()
 
 func start():
 	$WebLoginHUD.start()
-	$ReadyScreen.start()
-	$FindMatch.start()
 
-func end():
+func start_game():
+	print("All Players are ready, lets start the game")
+	$Game.new_game()
+	login_end()
+
+func login_end():
 	$WebLoginHUD.end()
-	$ReadyScreen.end()
 	$FindMatch.end()
+	$ReadyScreen.end()

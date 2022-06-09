@@ -1,12 +1,6 @@
 extends Node
 
-func _ready():
-	$WebMain.hide()
-
 func _on_LoginHUD_login_done():
-	$MessageHUD.show_start_message()
-
-func _on_WebMain_login_done():
 	$MessageHUD.show_start_message()
 
 func _on_MessageHUD_start_game():
@@ -15,23 +9,28 @@ func _on_MessageHUD_start_game():
 	$Game.new_game()
 
 func _on_Game_game_over():
-	$GameOverTimer.start()
-	$MessageHUD.show_end_message()
+	if GameManager.single:
+		$GameOverTimer.start()
+		$MessageHUD.show_end_message()
 
 func _on_GameOverTimer_timeout():
-	$GameOverTimer.stop()
-	$RankList.start()
+	if GameManager.single:
+		$GameOverTimer.stop()
+		$RankList.start()
 
 func _on_MessageHUD_music_changed():
 	if not GameManager.is_sound_on:
 		$Game.stop_music()
 
 func _on_MessageHUD_restart_game():
-	$MessageHUD.show_start_message()
-	$RankList.end()
+	if GameManager.single:
+		$MessageHUD.show_start_message()
+		$RankList.end()
 
 func _on_ChooseModeHUD_double():
-	$LoginHUD.start()
+	GameManager.single = false
+	$WebMain.start()
 
 func _on_ChooseModeHUD_single():
-	$WebMain.start()
+	GameManager.single = true
+	$LoginHUD.start()

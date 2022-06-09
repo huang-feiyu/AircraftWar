@@ -35,7 +35,7 @@ margin_top = 9.0
 margin_right = 204.0
 margin_bottom = 209.0
 custom_fonts/font = SubResource( 4 )
-text = "Alone"
+text = "Match"
 
 [node name="SingleButton" type="Button" parent="."]
 anchor_left = 0.5
@@ -45,7 +45,7 @@ margin_top = 800.0
 margin_right = 200.0
 margin_bottom = 1000.0
 custom_fonts/font = SubResource( 4 )
-text = "Match"
+text = "Alone"
 
 [connection signal="button_down" from="DoubleButton" to="." method="_on_DoubleButton_button_down"]
 [connection signal="button_down" from="SingleButton" to="." method="_on_SingleButton_button_down"]
