@@ -7,12 +7,12 @@
 size = 64
 font_data = ExtResource( 1 )
 
-[sub_resource type="DynamicFontData" id=2]
+[sub_resource type="DynamicFontData" id=6]
 font_path = "res://assets/fonts/Xolonium-Regular.ttf"
 
 [sub_resource type="DynamicFont" id=3]
 size = 256
-font_data = SubResource( 2 )
+font_data = SubResource( 6 )
 
 [sub_resource type="DynamicFont" id=4]
 size = 24
@@ -123,4 +123,4 @@ text = "Restart"
 [connection signal="toggled" from="MusicCheck" to="." method="_on_MusicCheck_toggled"]
 [connection signal="timeout" from="StartTimer" to="." method="_on_StartTimer_timeout"]
 [connection signal="timeout" from="EndTimer" to="." method="_on_EndTimer_timeout"]
-[connection signal="button_up" from="NextGameButton" to="." method="_on_NextGameButton_button_up"]
+[connection signal="button_down" from="NextGameButton" to="." method="_on_NextGameButton_button_down"]

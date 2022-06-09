@@ -58,7 +58,7 @@ func _on_EndTimer_timeout():
 	$EndMessage.hide()
 	$NextGameButton.show()
 
-func _on_NextGameButton_button_up():
+func _on_NextGameButton_button_down():
 	print("\nRestart")
 	$NextGameButton.hide()
 	emit_signal("restart_game")
@@ -72,3 +72,5 @@ func start_game():
 		GameManager.bg_img = bg_dir + "bg4.jpg" if randi() % 2 == 0 else bg_dir + "bg5.jpg"
 	emit_signal("start_game")
 	$StartTimer.start()
+
+

@@ -171,7 +171,7 @@ _global_script_class_icons={
 [application]
 
 config/name="AircraftWar"
-run/main_scene="res://src/online/WebMain.tscn"
+run/main_scene="res://src/Main.tscn"
 
 [autoload]
 
@@ -179,6 +179,7 @@ GameManager="*res://src/tools/GameManager.gd"
 Online="*res://src/online/autoload/Online.gd"
 OnlineMatch="*res://src/online/autoload/OnlineMatch.gd"
 Nakama="*res://addons/com.heroiclabs.nakama/Nakama.gd"
+WebGameManager="*res://src/online/autoload/WebGameManager.gd"
 
 [debug]
 

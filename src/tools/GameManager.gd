@@ -1,5 +1,8 @@
 extends Node
 
+# online
+var single = true
+
 # init by users
 var user_name
 var difficulty = 0 # 0 => easy; 1 => medium; 2 => hard

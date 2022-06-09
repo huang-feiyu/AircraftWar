@@ -1,4 +1,4 @@
-[gd_scene load_steps=9 format=2]
+[gd_scene load_steps=11 format=2]
 
 [ext_resource path="res://src/online/ui/WebLoginHUD.tscn" type="PackedScene" id=1]
 [ext_resource path="res://src/online/ui/FindMatch.tscn" type="PackedScene" id=2]
@@ -6,6 +6,8 @@
 [ext_resource path="res://src/online/ui/ReadyScreen.tscn" type="PackedScene" id=4]
 [ext_resource path="res://assets/fonts/Xolonium-Regular.ttf" type="DynamicFontData" id=5]
 [ext_resource path="res://src/online/ui/UserReady.gd" type="Script" id=6]
+[ext_resource path="res://src/models/game/Game.tscn" type="PackedScene" id=7]
+[ext_resource path="res://src/models/ui/MessageHUD.tscn" type="PackedScene" id=8]
 
 [sub_resource type="DynamicFont" id=1]
 size = 28
@@ -28,6 +30,10 @@ _bundled = {
 [node name="WebMain" type="Node2D"]
 script = ExtResource( 3 )
 
+[node name="Game" parent="." instance=ExtResource( 7 )]
+
+[node name="MessageHUD" parent="." instance=ExtResource( 8 )]
+
 [node name="ReadyScreen" parent="." instance=ExtResource( 4 )]
 player_ready_scene = SubResource( 2 )
 
@@ -35,4 +41,9 @@ player_ready_scene = SubResource( 2 )
 
 [node name="WebLoginHUD" parent="." instance=ExtResource( 1 )]
 
+[connection signal="game_over" from="Game" to="." method="_on_Game_game_over"]
+[connection signal="music_changed" from="MessageHUD" to="." method="_on_MessageHUD_music_changed"]
+[connection signal="restart_game" from="MessageHUD" to="." method="_on_MessageHUD_restart_game"]
+[connection signal="start_game" from="MessageHUD" to="." method="_on_MessageHUD_start_game"]
 [connection signal="player_ready_signal" from="ReadyScreen" to="." method="_on_ReadyScreen_player_ready_signal"]
+[connection signal="weblogin_done" from="WebLoginHUD" to="." method="_on_WebLoginHUD_weblogin_done"]

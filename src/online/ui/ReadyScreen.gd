@@ -1,4 +1,4 @@
-extends Control
+extends CanvasLayer
 
 export(PackedScene) var player_ready_scene
 
@@ -11,6 +11,7 @@ func _ready():
 	OnlineMatch.connect("match_ready", self, "MatchReady")
 	OnlineMatch.connect("match_not_ready", self, "MatchNotReady")
 	OnlineMatch.connect("matchmaker_matched",self, "AddPlayers")
+	end()
 
 func AddPlayers(players):
 	for id in players:
@@ -41,3 +42,13 @@ func set_ready_status(id, status):
 
 func _on_Button_button_down():
 	emit_signal("player_ready_signal")
+
+func end():
+	$Panel.hide()
+	$Button.hide()
+	$VBoxContainer.hide()
+
+func start():
+	$Panel.show()
+	$Button.show()
+	$VBoxContainer.show()

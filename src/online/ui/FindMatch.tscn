@@ -7,7 +7,7 @@
 size = 54
 font_data = ExtResource( 2 )
 
-[node name="FindMatch" type="Control"]
+[node name="FindMatch" type="CanvasLayer"]
 script = ExtResource( 1 )
 
 [node name="Panel" type="Panel" parent="."]
@@ -18,26 +18,21 @@ margin_bottom = 883.0
 
 [node name="Label" type="Label" parent="."]
 anchor_left = 0.5
-anchor_top = 0.5
 anchor_right = 0.5
-anchor_bottom = 0.5
-margin_left = 301.0
-margin_top = 545.0
-margin_right = 768.0
-margin_bottom = 611.0
+margin_left = -233.5
+margin_top = 580.0
+margin_right = 233.5
+margin_bottom = 66.0
 custom_fonts/font = SubResource( 1 )
 text = "Finding Match..."
-__meta__ = {
-"_edit_use_anchors_": true
-}
 
 [node name="Button" type="Button" parent="."]
 anchor_left = 0.5
 anchor_right = 0.5
-margin_left = 263.0
-margin_top = 498.0
-margin_right = 800.0
-margin_bottom = 650.0
+margin_left = -268.5
+margin_top = 540.0
+margin_right = 268.5
+margin_bottom = 740.0
 custom_fonts/font = SubResource( 1 )
 text = "Lets Find a Match"
 

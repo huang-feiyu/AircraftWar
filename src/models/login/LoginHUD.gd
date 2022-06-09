@@ -6,7 +6,6 @@ func _ready():
 	$Panel.hide()
 	$InputContainer.hide()
 	$PasswordConfirm.hide()
-	start()
 
 func _on_Button_button_down():
 	set_dialog_text("Password: " + $InputContainer/PasswordContainer/PasswordInput.get_text())
