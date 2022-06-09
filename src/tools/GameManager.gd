@@ -2,6 +2,8 @@ extends Node
 
 # online
 var single = true
+var opponent_score = 0
+var id
 
 # init by users
 var user_name

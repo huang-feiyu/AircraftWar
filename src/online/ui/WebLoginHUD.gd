@@ -50,7 +50,7 @@ func end():
 
 func set_dialog_text(text):
 	$PasswordConfirm.hide()
-	$PasswordConfirm.window_title = "Ensure your password"
+	$PasswordConfirm.window_title = "Something went wrong"
 	$PasswordConfirm.dialog_text = text
 	$PasswordConfirm.show()
 
