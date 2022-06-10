@@ -46,6 +46,8 @@ func _on_Button_button_down():
 func end():
 	$Panel.hide()
 	$Button.hide()
+	for id in $VBoxContainer.get_children():
+		$VBoxContainer.remove_child(id)
 	$VBoxContainer.hide()
 
 func start():

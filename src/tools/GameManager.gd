@@ -2,6 +2,11 @@ extends Node
 
 # online
 var single = true
+var opponent_alive = false
+var opponent_score = 0
+var is_all_ready = false
+var is_game_over = false
+var id
 
 # init by users
 var user_name
@@ -59,6 +64,9 @@ func init():
 	enemy_num = 0
 	boss_count = 0
 	boss_alive = 0
+	is_all_ready = false
+	opponent_alive = true
+	is_game_over = false
 	start()
 
 func start():

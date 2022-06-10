@@ -179,7 +179,6 @@ GameManager="*res://src/tools/GameManager.gd"
 Online="*res://src/online/autoload/Online.gd"
 OnlineMatch="*res://src/online/autoload/OnlineMatch.gd"
 Nakama="*res://addons/com.heroiclabs.nakama/Nakama.gd"
-WebGameManager="*res://src/online/autoload/WebGameManager.gd"
 
 [debug]
 
@@ -194,6 +193,10 @@ multirun/other_window_args="join"
 window/size/width=1080
 window/size/height=2280
 window/handheld/orientation="portrait"
+
+[editor]
+
+main_run_args="listen"
 
 [editor_plugins]
 

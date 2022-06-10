@@ -29,6 +29,14 @@ __meta__ = {
 "_edit_use_anchors_": true
 }
 
+[node name="RemoteScore" type="Label" parent="."]
+margin_left = 3.0
+margin_top = 205.0
+margin_right = 262.0
+margin_bottom = 253.0
+custom_fonts/font = SubResource( 1 )
+text = "Other: 100"
+
 [node name="HPBar" type="ProgressBar" parent="."]
 margin_left = 110.0
 margin_top = 144.0
