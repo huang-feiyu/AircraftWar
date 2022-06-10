@@ -79,10 +79,12 @@ func start_game():
 	$StartTimer.start()
 
 func update_score():
+	$EndMessage.hide()
 	if GameManager.score > GameManager.opponent_score:
 		$EndMessage.text = "You win!"
 	else:
 		$EndMessage.text = "You lose!"
+	$EndMessage.show()
 	$VSMessage.hide()
 	$VSMessage.text = str(GameManager.score) + " vs " + str(GameManager.opponent_score)
 	$VSMessage.show()

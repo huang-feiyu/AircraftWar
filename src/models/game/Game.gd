@@ -17,6 +17,7 @@ signal game_over # to Main
 func _ready():
 	screen_size = get_viewport().size
 	randomize()
+	$BulletRest.hide()
 
 # Called every frame. 'delta' is the elapsed time since the previous frame.
 func _process(delta):
@@ -35,6 +36,10 @@ func _process(delta):
 		print("bomb supply")
 		get_tree().call_group("enemy", "end")
 
+	$BulletRest.text = "Bullet: " + str($Hero.get_bullet_rest())
+	if $SpeedUpTimer.time_left > 0:
+		$BulletRest.text += "\nEnemy speed up!"
+
 # boss generate
 func _on_Game_boss_generate():
 	GameManager.boss_count += 1
@@ -50,6 +55,7 @@ func _on_StartTimer_timeout():
 	$PlayHUD.start_game()
 	$EnemyTimer.start()
 	$Hero.start($StartPosition.position)
+	$BulletRest.show()
 
 # new an enemy every 1 second
 func _on_EnemyTimer_timeout():
@@ -66,6 +72,11 @@ func _on_EnemyTimer_timeout():
 func _on_DifficultyTimer_timeout():
 	if not is_game_over:
 		GameManager.update()
+		$SpeedUpTimer.start()
+
+# message show
+func _on_SpeedUpTimer_timeout():
+	$SpeedUpTimer.stop()
 
 # game over
 func _on_Hero_hero_dead():
@@ -94,7 +105,9 @@ func game_over():
 	$StartTimer.stop()
 	$DifficultyTimer.start()
 	$EnemyTimer.stop()
+	$SpeedUpTimer.stop()
 	$PlayHUD.game_over()
+	$BulletRest.hide()
 	get_tree().call_group("all", "queue_free")
 	stop_music()
 

@@ -13,12 +13,26 @@
 ### 游戏流程图
 
 ```
--> Main(S0), LoginHUD --{4}-> Main, MessageHUD --{1}-> Game, PlayHUD(S1) --{2}-> RankList, MessageHUD(S2) --{3}-> S0
+Main(S0), ChooseModeHUD --{5}-> Main, LoginHUD --{4}-> $$ -- Main, MessageHUD --{1}-> Game, PlayHUD(S1) --{2}-> RankList, MessageHUD(S2) --{3}-> S0
 
-{4}: 登录校验/注册
-{1}: 开始游戏, 根据 MessageHUD 中 Button 的状态切换到不同的 state.
-{2}: 游戏结束, 自动切换到 S2.
-{3}: 切换到排行榜, 根据 MessageHUD 中 RestartButton 切换到 S0.
+Main(S0), ChooseModeHUD {0}
+│
+├─ Single -> Main/LoginHUD -{1}-> Main/MessageHUD(S1) -{2}
+│                                                       │
+│                                                       └--> Game/PlayHUD --{3}-> RankList, MessageHUD(S2)
+│
+└─ Match  -> WebMain/WebLoginHUD -{1}-> WebMain/FindMatch
+                                        │
+                                        {4}-> WebMain/ReadyScreen -{5}-> S1
+
+{0}: 单机或者网络游戏
+{1}: 登录校验/注册
+{2}: 开始游戏, 根据 MessageHUD 中 Button 的状态切换到不同的难度.
+{3}: 游戏结束, 自动切换到 S2.
+    * if single: 切换到排行榜, 根据 MessageHUD 中 RestartButton 切换到 S0.
+    * if match: 等待两者都结束, 显示分数对比与输赢. 根据 MessageHUD 中 RestartButton 切换到 S0.
+{4}: 等待玩家匹配, 匹配完成后, 切换到 ReadyScreen.
+{5}: 等待玩家确认, 玩家都确认后, 切换到 S1.
 ```
 
 ### 目录结构
@@ -31,7 +45,6 @@
 ├── assets/ 素材资源
 ├── data/ 测试数据
 ├── src/ 游戏代码
-├── src
 │   ├── Main.gd
 │   ├── Main.tscn
 │   ├── characters/
@@ -46,11 +59,16 @@
 │   │   ├── game/
 │   │   ├── login/
 │   │   └── ui/
+│   ├── online
+│   │   ├── WebMain.gd
+│   │   ├── WebMain.tscn
+│   │   ├── autoload
+│   │   └── ui
 │   └── tools/
 │       ├── GameManager.gd
 │       └── GameManager.tscn
 └── project.godot
- ```
+```
 
 ## 优化日志
 
@@ -116,36 +134,6 @@ Enemy extends FlyingObject
 
 2. 适配 Window Dialog 字体
 
-## 结构概述
+### 2022-06-10
 
-### Main
-
-游戏场景切换.
-
-```
-Main
-* Game
-* LoginHUD
-* MessageHUD
-* RankList
-* GameOverTimer: 过一秒后切换到 RankList
-```
-
-### MessageHUD
-
-发送游戏开始信号到 Main, 显示按钮与开始结束信息提示.
-
-```
-MessageHUD
-* EasyButton
-* NormalButton
-* HardButton
-* StartMessage
-* EndMessage
-* MusicCheck: 是否开启音乐
-* StartTimer: 一秒后取消显示 StartMessage
-* EndTimer: 一秒后取消显示 EndMessage
-* NextGameButton: 重新开始
-```
-
-
+todo: 结构混乱, 需要做一些优化.

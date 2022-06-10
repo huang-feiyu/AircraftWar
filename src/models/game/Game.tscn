@@ -1,4 +1,4 @@
-[gd_scene load_steps=10 format=2]
+[gd_scene load_steps=12 format=2]
 
 [ext_resource path="res://src/characters/hero/Hero.tscn" type="PackedScene" id=1]
 [ext_resource path="res://src/models/game/Game.gd" type="Script" id=2]
@@ -9,6 +9,11 @@
 [ext_resource path="res://assets/audio/bgm/bgm_boss.wav" type="AudioStream" id=7]
 [ext_resource path="res://assets/audio/bgm/bgm.wav" type="AudioStream" id=8]
 [ext_resource path="res://assets/audio/sfx/game_over.wav" type="AudioStream" id=9]
+[ext_resource path="res://assets/fonts/Xolonium-Regular.ttf" type="DynamicFontData" id=10]
+
+[sub_resource type="DynamicFont" id=1]
+size = 32
+font_data = ExtResource( 10 )
 
 [node name="Game" type="Node"]
 script = ExtResource( 2 )
@@ -32,6 +37,8 @@ wait_time = 0.5
 [node name="DifficultyTimer" type="Timer" parent="."]
 wait_time = 30.0
 
+[node name="SpeedUpTimer" type="Timer" parent="."]
+
 [node name="StartPosition" type="Position2D" parent="."]
 position = Vector2( 540, 1824 )
 
@@ -46,6 +53,14 @@ stream = ExtResource( 7 )
 [node name="GameOverSound" type="AudioStreamPlayer" parent="."]
 stream = ExtResource( 9 )
 
+[node name="BulletRest" type="Label" parent="."]
+margin_left = 3.0
+margin_top = 561.0
+margin_right = 135.0
+margin_bottom = 600.0
+custom_fonts/font = SubResource( 1 )
+text = "Bullet: "
+
 [connection signal="bgm_stop" from="." to="." method="_on_Game_bgm_stop"]
 [connection signal="boss_bgm_stop" from="." to="." method="_on_Game_boss_bgm_stop"]
 [connection signal="boss_generate" from="." to="." method="_on_Game_boss_generate"]
@@ -53,5 +68,6 @@ stream = ExtResource( 9 )
 [connection signal="timeout" from="EnemyTimer" to="." method="_on_EnemyTimer_timeout"]
 [connection signal="timeout" from="StartTimer" to="." method="_on_StartTimer_timeout"]
 [connection signal="timeout" from="DifficultyTimer" to="." method="_on_DifficultyTimer_timeout"]
+[connection signal="timeout" from="SpeedUpTimer" to="." method="_on_SpeedUpTimer_timeout"]
 [connection signal="finished" from="BgmSound" to="." method="_on_BgmSound_finished"]
 [connection signal="finished" from="BossBgmSound" to="." method="_on_BossBgmSound_finished"]
